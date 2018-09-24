@@ -1,0 +1,17 @@
+[
+  {
+    "id": 0,
+    "name": "Super-product",
+    "price": 100
+  },
+  {
+    "id": 1,
+    "name": "New-product",
+    "price": 200
+  },
+  {
+    "id": 2,
+    "name": "Good-product",
+    "price": 300
+  }
+]
