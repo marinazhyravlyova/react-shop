@@ -1,6 +1,20 @@
+const path = require('path');
+
 module.exports = {
     entry: {
-        bundle: './src/main.js',
+        main: './src/main.js',
+    },
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        chunkFilename: '[name].bundle.js',
+        publicPath: '/',
+    },
+    devServer: {
+        contentBase: './',
+        stats: 'errors-only',
+        hot: true,
+        historyApiFallback: true,
     },
     module: {
         rules: [
@@ -13,5 +27,5 @@ module.exports = {
             }
         ]
     },
-    devtool: "inline-source-map"
+    devtool: "source-map"
 };
