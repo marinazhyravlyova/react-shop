@@ -1,14 +1,21 @@
 import AddPropertiesComponent from './add-properties';
+import SearchComponent from './search-component';
 import Products from "../public/product";
 
 class ProductList {
     constructor(products) {
         this.products = products;
         this.productsContainer = document.getElementById('result');
+        this.filteredProducts = products;
         this.addPropertiesComponent = new AddPropertiesComponent((property) => {
             this.addNewProperty(property);
+            this.filterProducts('');
             this.render();
         });
+        this.search = new SearchComponent((criterionSearch) => {
+            this.filterProducts(criterionSearch);
+            this.render();
+        })
     }
 
     addNewProperty({ propertyName, value }) {
@@ -20,10 +27,23 @@ class ProductList {
         });
     }
 
+    filterProducts(criterionSearch) {
+        this.filteredProducts = (this.products || []).filter(product => {
+            const productPropertyNames = Object.keys(product);
+            const propertyName = (productPropertyNames || []).find(productPropertyName => {
+                const productPropertyValue = product[productPropertyName];
+
+                return productPropertyValue.toString().indexOf(criterionSearch) !== -1;
+            });
+
+            return !!propertyName;
+        });
+    }
+
     render() {
         this.productsContainer.innerHTML = '';
 
-        (this.products || []).forEach((product) => {
+        (this.filteredProducts || []).forEach((product) => {
             const resultProductHtml = Object.keys(product).reduce((resultProductHtml, productPropertyKey) => {
                 return resultProductHtml + `
                     <div>
