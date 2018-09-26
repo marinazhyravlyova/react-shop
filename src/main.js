@@ -100,12 +100,12 @@ const object3 = {
     aisle: 'no'
 };
 
+const array = [object2, object, object3];
+
 const getSortedObjectPropertyNames = (object) => {
         const arrayProperties = Object.keys(object).sort();
         console.log(arrayProperties);
 };
-
-const array = [object2, object, object3];
 
 const removeElementFilter = (array, deletableObject) => {
     return array.filter((object) => { return (object !== deletableObject); });
