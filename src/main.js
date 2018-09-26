@@ -63,4 +63,22 @@ class ProductList {
 document.addEventListener("DOMContentLoaded", async () => {
     const productList = new ProductList(Products);
     productList.render();
+    getSortedObjectPropertyNames(object);
 });
+
+//Написать функицю на вход принимающую объект а на выход выдающую массив
+//с названиями свойств в алфавитом порядке
+const object = {
+    name: 'Marina',
+    description: 'clever',
+    years: '17',
+    growth: '171',
+    weight: '51',
+    big: 'no',
+    aisle: 'no'
+};
+
+const getSortedObjectPropertyNames = (object) => {
+        const arrayProperties = Object.keys(object).sort();
+        console.log(arrayProperties);
+};
