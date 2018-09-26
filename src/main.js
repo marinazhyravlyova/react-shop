@@ -122,5 +122,6 @@ const removeElementReduce = (array, deletableObject) => {
 
         return newArray;
     }, []);
+
 };
 
