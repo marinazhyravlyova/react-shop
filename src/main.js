@@ -108,15 +108,19 @@ const getSortedObjectPropertyNames = (object) => {
 };
 
 const removeElementFilter = (array, deletableObject) => {
-    return array.filter((object) => { return (object !== deletableObject); });
+    return array.filter((object) => object !== deletableObject);
 };
 
 const removeElementReduce = (array, deletableObject) => {
-    const result = [];
-    array.reduce((newArray, currentObject) => {
-        if(currentObject !== deletableObject){ return result.push(currentObject); }
-    });
+    return array.reduce((newArray, currentObject) => {
+        if (currentObject !== deletableObject) {
+            return [
+                ... newArray,
+                currentObject,
+            ];
+        }
 
-    return result;
+        return newArray;
+    }, []);
 };
 
