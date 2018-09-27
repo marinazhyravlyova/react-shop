@@ -1,6 +1,7 @@
 import AddPropertiesComponent from './add-properties';
 import SearchComponent from './search-component';
 import Products from "../public/product";
+import './task';
 
 class ProductList {
     constructor(products) {
@@ -18,7 +19,7 @@ class ProductList {
         })
     }
 
-    addNewProperty({ propertyName, value }) {
+    addNewProperty({propertyName, value}) {
         this.products = this.products.map(product => {
             return {
                 ...product,
@@ -63,65 +64,6 @@ class ProductList {
 document.addEventListener("DOMContentLoaded", async () => {
     const productList = new ProductList(Products);
     productList.render();
-    getSortedObjectPropertyNames(object);
-    const newArray = removeElementFilter(array, object2);
-    console.log(newArray);
-    const newArray2 = removeElementReduce(array, object2);
-    console.log(newArray2);
 });
 
-//Написать функицю на вход принимающую объект а на выход выдающую массив
-//с названиями свойств в алфавитом порядке
-const object = {
-    name: 'Marina',
-    description: 'clever',
-    years: '17',
-    growth: '171',
-    weight: '51',
-    big: 'no',
-    aisle: 'no'
-};
-const object2 = {
-    name: 'Marina2',
-    description: 'clever',
-    years: '17',
-    growth: '171',
-    weight: '51',
-    big: 'no',
-    aisle: 'no'
-};
-const object3 = {
-    name: 'Marina3',
-    description: 'clever',
-    years: '17',
-    growth: '171',
-    weight: '51',
-    big: 'no',
-    aisle: 'no'
-};
-
-const array = [object2, object, object3];
-
-const getSortedObjectPropertyNames = (object) => {
-        const arrayProperties = Object.keys(object).sort();
-        console.log(arrayProperties);
-};
-
-const removeElementFilter = (array, deletableObject) => {
-    return array.filter((object) => object !== deletableObject);
-};
-
-const removeElementReduce = (array, deletableObject) => {
-    return array.reduce((newArray, currentObject) => {
-        if (currentObject !== deletableObject) {
-            return [
-                ... newArray,
-                currentObject,
-            ];
-        }
-
-        return newArray;
-    }, []);
-
-};
 
