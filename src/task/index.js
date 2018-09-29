@@ -3,3 +3,4 @@ import './sort';
 import './map';
 import './reverse';
 import './promise';
+import './react-example';
