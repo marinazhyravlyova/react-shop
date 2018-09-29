@@ -1,8 +1,7 @@
 import { array } from "./array";
 
-const removeElementFilter = (array, deletableObject) => {
-    return array.filter((object) => object !== deletableObject);
-};
+const removeElementFilter = (array, deletableObject) =>
+    array.filter((object) => object !== deletableObject);
 
 const removeElementReduce = (array, deletableObject) => {
     return array.reduce((newArray, currentObject) => {
