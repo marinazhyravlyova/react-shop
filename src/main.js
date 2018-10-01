@@ -1,69 +1,65 @@
-import AddPropertiesComponent from './add-properties';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Products from '../public/product';
 import SearchComponent from './search-component';
-import Products from "../public/product";
 import './task';
 
-class ProductList {
-    constructor(products) {
-        this.products = products;
-        this.productsContainer = document.getElementById('result');
-        this.filteredProducts = products;
-        this.addPropertiesComponent = new AddPropertiesComponent((property) => {
-            this.addNewProperty(property);
-            this.filterProducts('');
-            this.render();
-        });
-        this.search = new SearchComponent((criterionSearch) => {
-            this.filterProducts(criterionSearch);
-            this.render();
-        })
+class ProductsEditPage extends Component {
+    constructor(...rest) {
+        super(...rest);
+
+        this.state = {
+            searchValue: '',
+            properties: [{
+                propertyName: '',
+                propertyValue: '',
+            }],
+            products: Products,
+            filteredProducts: Products,
+        };
+        this.onSearchValueChange = this.onSearchValueChange.bind(this);
+        this.onPropertiesChange = this.onPropertiesChange.bind(this);
     }
 
-    addNewProperty({propertyName, value}) {
-        this.products = this.products.map(product => {
-            return {
-                ...product,
-                [propertyName]: value,
-            };
-        });
+    onSearchValueChange(searchValue) {
+        this.setState({ searchValue });
+        console.log(searchValue);
+        //TODO нужно тут что-то еще (смотри в 'product-list/index.js')
+        //TODO чтобы получить обновленный filteredProducts и потом его(filteredProducts) обновить в этом компоненте
     }
 
-    filterProducts(criterionSearch) {
-        this.filteredProducts = (this.products || []).filter(product => {
-            const productPropertyNames = Object.keys(product);
-            const propertyName = (productPropertyNames || []).find(productPropertyName => {
-                const productPropertyValue = product[productPropertyName];
-
-                return productPropertyValue.toString().indexOf(criterionSearch) !== -1;
-            });
-
-            return !!propertyName;
-        });
+    onPropertiesChange(properties) {
+        // TODO need to set state (see onSearchValueChange method)
+        // TODO and then update products
     }
 
     render() {
-        this.productsContainer.innerHTML = '';
-
-        (this.filteredProducts || []).forEach((product) => {
-            const resultProductHtml = Object.keys(product).reduce((resultProductHtml, productPropertyKey) => {
-                return resultProductHtml + `
-                    <div>
-                        <span class="product-property-name">${productPropertyKey}: </span>
-                        <span class="product-property-value">${product[productPropertyKey]}</span>
-                    </div>
-                `;
-            }, '');
-
-            this.productsContainer.innerHTML += `
-                <div class="product">${resultProductHtml}</div></br>
-            `;
-        });
+        return (
+            <div className='application'>
+                <SearchComponent
+                    searchValue={this.state.searchValue}
+                    searchValueChange={this.onSearchValueChange}
+                />
+                {/*<AddPropertiesComponent
+                    properties={this.state.properties}
+                    propertiesChange={this.onPropertiesChange}
+                />*/}
+                {/*<ProductListComponent
+                    products={this.state.filteredProducts}
+                />*/}
+            </div>
+        );
     }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const productList = new ProductList(Products);
-    productList.render();
-});
+ReactDOM.render(<ProductsEditPage/>, document.getElementById('root'));
 
+//TODO ПОРЯДОК ДЕЙСТВИЙ: (Как только выполняешь один пункт, коммитишь,  пушишь и показываешь мне)
+//TODO 1. Сделать компонент ProductComponent (который просто отображает продукт): <ProductComponent product={product} />
 
+//TODO 2. Сделать компонент ProductListComponent который 
+//TODO 2. выводит массив ProductComponent: {(products || []).map(product, index) => <ProductComponent product={product} key={index} />}
+
+//TODO 3. Подключить поиск, (чтобы когда меняется строка в поиске, менялся и массив this.state.filteredProducts)
+
+//TODO 4. Переписать и подключить компонент AddPropertiesComponent
