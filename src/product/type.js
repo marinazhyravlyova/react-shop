@@ -1,2 +1,0 @@
-export const PRODUCT_TYPE_1 = 'PRODUCT_TYPE_1';
-export const PRODUCT_TYPE_2 = 'PRODUCT_TYPE_2';

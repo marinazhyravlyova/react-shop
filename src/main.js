@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Products from '../public/product';
 import SearchComponent from './search-component';
+import ProductListComponent from './product-list';
+import AddPropertiesComponent from './add-properties';
 import './task';
 
 class ProductsEditPage extends Component {
@@ -10,10 +12,6 @@ class ProductsEditPage extends Component {
 
         this.state = {
             searchValue: '',
-            properties: [{
-                propertyName: '',
-                propertyValue: '',
-            }],
             products: Products,
             filteredProducts: Products,
         };
@@ -22,15 +20,39 @@ class ProductsEditPage extends Component {
     }
 
     onSearchValueChange(searchValue) {
-        this.setState({ searchValue });
-        console.log(searchValue);
-        //TODO нужно тут что-то еще (смотри в 'product-list/index.js')
-        //TODO чтобы получить обновленный filteredProducts и потом его(filteredProducts) обновить в этом компоненте
+        const filteredProducts = this.getFilteredProducts(searchValue);
+
+        this.setState({
+            searchValue,
+            filteredProducts,
+        });
     }
 
-    onPropertiesChange(properties) {
-        // TODO need to set state (see onSearchValueChange method)
-        // TODO and then update products
+    getFilteredProducts(criterionSearch) {
+        return (this.state.products || []).filter(product => {
+            const productPropertyNames = Object.keys(product);
+            const propertyName = (productPropertyNames || []).find(
+                productPropertyName => {
+                    const productPropertyValue = product[productPropertyName];
+
+                    return productPropertyValue.toString().indexOf(criterionSearch) !== -1;
+                });
+
+            return !!propertyName;
+        });
+    }
+    
+    onPropertiesChange({ propertyName, propertyValue }) {
+        const products = this.state.products.map(product => {
+                    return {
+                        ...product,
+                        [propertyName]: propertyValue,
+                    };
+                });
+        this.setState({
+            products,
+            filteredProducts: products,
+        });
     }
 
     render() {
@@ -40,26 +62,15 @@ class ProductsEditPage extends Component {
                     searchValue={this.state.searchValue}
                     searchValueChange={this.onSearchValueChange}
                 />
-                {/*<AddPropertiesComponent
-                    properties={this.state.properties}
+                <AddPropertiesComponent
                     propertiesChange={this.onPropertiesChange}
-                />*/}
-                {/*<ProductListComponent
+                />
+                <ProductListComponent
                     products={this.state.filteredProducts}
-                />*/}
+                />
             </div>
         );
     }
 }
 
 ReactDOM.render(<ProductsEditPage/>, document.getElementById('root'));
-
-//TODO ПОРЯДОК ДЕЙСТВИЙ: (Как только выполняешь один пункт, коммитишь,  пушишь и показываешь мне)
-//TODO 1. Сделать компонент ProductComponent (который просто отображает продукт): <ProductComponent product={product} />
-
-//TODO 2. Сделать компонент ProductListComponent который 
-//TODO 2. выводит массив ProductComponent: {(products || []).map(product, index) => <ProductComponent product={product} key={index} />}
-
-//TODO 3. Подключить поиск, (чтобы когда меняется строка в поиске, менялся и массив this.state.filteredProducts)
-
-//TODO 4. Переписать и подключить компонент AddPropertiesComponent

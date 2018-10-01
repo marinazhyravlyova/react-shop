@@ -1,15 +1,42 @@
-export default class AddPropertiesComponent {
-    constructor(onClick) {
-        this.onClick = onClick;
-        this.id = document.getElementById('add-property');
-        this.propertyName = document.getElementById('property-name');
-        this.value = document.getElementById('value');
+import React, { Component } from 'react';
 
-        this.id.onclick = () => {
-            const propertyName = this.propertyName.value;
-            const value = this.value.value;
-
-            this.onClick({ propertyName, value });
+export default class AddPropertiesComponent extends Component{
+    
+    constructor() {
+        super();
+        this.state = {
+            propertyName: '',
+            propertyValue: '',
         };
+        this.onPropertyNameChange = this.onPropertyNameChange.bind(this);
+        this.onPropertyValueChange = this.onPropertyValueChange.bind(this);
+        this.onAddButtonClick = this.onAddButtonClick.bind(this);
+    }
+
+    onPropertyNameChange(event) {
+        const value = event.target.value;
+        this.setState({
+            propertyName: value,
+        });
+    }
+    
+    onPropertyValueChange(event) {
+        const value = event.target.value;
+        this.setState({
+            propertyValue: value,
+        });
+    }
+
+    onAddButtonClick(){
+        const { propertyName, propertyValue } = this.state;
+        this.props.propertiesChange({ propertyName, propertyValue });
+    }
+    
+    render() {
+        return(<div>
+            <input value={this.state.propertyName} onChange={this.onPropertyNameChange}/>
+            <input value={this.state.propertyValue} onChange={this.onPropertyValueChange}/>
+            <button onClick={this.onAddButtonClick}>Add</button>
+        </div>);
     }
 }
