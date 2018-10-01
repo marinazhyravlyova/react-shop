@@ -1,69 +1,76 @@
-import AddPropertiesComponent from './add-properties';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Products from '../public/product';
 import SearchComponent from './search-component';
-import Products from "../public/product";
+import ProductListComponent from './product-list';
+import AddPropertiesComponent from './add-properties';
 import './task';
 
-class ProductList {
-    constructor(products) {
-        this.products = products;
-        this.productsContainer = document.getElementById('result');
-        this.filteredProducts = products;
-        this.addPropertiesComponent = new AddPropertiesComponent((property) => {
-            this.addNewProperty(property);
-            this.filterProducts('');
-            this.render();
-        });
-        this.search = new SearchComponent((criterionSearch) => {
-            this.filterProducts(criterionSearch);
-            this.render();
-        })
+class ProductsEditPage extends Component {
+    constructor(...rest) {
+        super(...rest);
+
+        this.state = {
+            searchValue: '',
+            products: Products,
+            filteredProducts: Products,
+        };
+        this.onSearchValueChange = this.onSearchValueChange.bind(this);
+        this.onPropertiesChange = this.onPropertiesChange.bind(this);
     }
 
-    addNewProperty({propertyName, value}) {
-        this.products = this.products.map(product => {
-            return {
-                ...product,
-                [propertyName]: value,
-            };
+    onSearchValueChange(searchValue) {
+        const filteredProducts = this.getFilteredProducts(searchValue);
+
+        this.setState({
+            searchValue,
+            filteredProducts,
         });
     }
 
-    filterProducts(criterionSearch) {
-        this.filteredProducts = (this.products || []).filter(product => {
+    getFilteredProducts(criterionSearch) {
+        return (this.state.products || []).filter(product => {
             const productPropertyNames = Object.keys(product);
-            const propertyName = (productPropertyNames || []).find(productPropertyName => {
-                const productPropertyValue = product[productPropertyName];
+            const propertyName = (productPropertyNames || []).find(
+                productPropertyName => {
+                    const productPropertyValue = product[productPropertyName];
 
-                return productPropertyValue.toString().indexOf(criterionSearch) !== -1;
-            });
+                    return productPropertyValue.toString().indexOf(criterionSearch) !== -1;
+                });
 
             return !!propertyName;
         });
     }
+    
+    onPropertiesChange({ propertyName, propertyValue }) {
+        const products = this.state.products.map(product => {
+                    return {
+                        ...product,
+                        [propertyName]: propertyValue,
+                    };
+                });
+        this.setState({
+            products,
+            filteredProducts: products,
+        });
+    }
 
     render() {
-        this.productsContainer.innerHTML = '';
-
-        (this.filteredProducts || []).forEach((product) => {
-            const resultProductHtml = Object.keys(product).reduce((resultProductHtml, productPropertyKey) => {
-                return resultProductHtml + `
-                    <div>
-                        <span class="product-property-name">${productPropertyKey}: </span>
-                        <span class="product-property-value">${product[productPropertyKey]}</span>
-                    </div>
-                `;
-            }, '');
-
-            this.productsContainer.innerHTML += `
-                <div class="product">${resultProductHtml}</div></br>
-            `;
-        });
+        return (
+            <div className='application'>
+                <SearchComponent
+                    searchValue={this.state.searchValue}
+                    searchValueChange={this.onSearchValueChange}
+                />
+                <AddPropertiesComponent
+                    propertiesChange={this.onPropertiesChange}
+                />
+                <ProductListComponent
+                    products={this.state.filteredProducts}
+                />
+            </div>
+        );
     }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const productList = new ProductList(Products);
-    productList.render();
-});
-
-
+ReactDOM.render(<ProductsEditPage/>, document.getElementById('root'));

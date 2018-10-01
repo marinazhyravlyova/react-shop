@@ -1,19 +1,28 @@
-export default class SearchComponent {
-    constructor(onClick) {
-        const searchContainer = document.getElementById('search-component');
+import React, { Component } from 'react';
 
-        searchContainer.innerHTML += `
-                <input id="input-search" type="text"/>
-                <button id="btn-search">Search</button></br>
-            `;
-        this.onClick = onClick;
-        this.button = document.getElementById('btn-search');
-        this.criterionSearch = document.getElementById('input-search');
+export default class SearchComponent extends Component {
+    constructor(...rest) {
+        super(...rest);
+        
+        this.onSearchValueChange = this.onSearchValueChange.bind(this);
+    }
 
-        this.button.onclick = () => {
-            const criterionSearch = this.criterionSearch.value;
-
-            this.onClick(criterionSearch);
-        };
+    onSearchValueChange(event) {
+        const value = event.target.value;
+        
+        this.props.searchValueChange(value);
+    }
+    
+    render() {
+        return (
+            <div className='search-component'>
+                <label>Search:</label>
+                <input
+                    value={this.props.searchValue}
+                    onChange={this.onSearchValueChange}
+                    placeholder='type for search'
+                />
+            </div>
+        );
     }
 }
