@@ -1,51 +1,46 @@
 import React, { Component } from 'react';
 
 export default class AddProductComponent extends Component{
-
     constructor() {
         super();
         this.state = {
-            productId: '',
-            productName: '',
-            productPrice: '',
+            id: '',
+            name: '',
+            price: '',
         };
-        this.onProductIdChange = this.onProductIdChange.bind(this);
-        this.onProductNameChange = this.onProductNameChange.bind(this);
-        this.onProductPriceChange = this.onProductPriceChange.bind(this);
+        this.onProductPropertyChange = this.onProductPropertyChange.bind(this);
         this.addProduct = this.addProduct.bind(this);
     }
 
-    onProductIdChange(event) {
+    onProductPropertyChange(event, propertyName) {
         const value = event.target.value;
-        this.setState({
-            productId: value,
-        });
-    }
 
-    onProductNameChange(event) {
-        const value = event.target.value;
         this.setState({
-            productName: value,
-        });
-    }
-
-    onProductPriceChange(event) {
-        const value = event.target.value;
-        this.setState({
-            productPrice: value,
+            [propertyName]: value,
         });
     }
 
     addProduct(){
-        const { productId, productName, productPrice } = this.state;
-        this.props.addProduct({ productId, productName, productPrice });
+        this.props.addProduct({ ...this.state });
     }
 
     render() {
         return(<div>
-            <span>Product id: </span><input value={this.state.productId} onChange={this.onProductIdChange}/>
-            <span>Product name: </span><input value={this.state.productName} onChange={this.onProductNameChange}/>
-            <span>Product price: </span><input value={this.state.productPrice} onChange={this.onProductPriceChange}/>
+            <span>Product id: </span>
+            <input
+                value={this.state.id}
+                onChange={(event) => this.onProductPropertyChange(event, 'id')}
+            />
+            <span>Product name: </span>
+            <input
+                value={this.state.name}
+                onChange={(event) => this.onProductPropertyChange(event, 'name')}
+            />
+            <span>Product price: </span>
+            <input
+                value={this.state.price}
+                onChange={(event) => this.onProductPropertyChange(event, 'price')}
+            />
             <button onClick={this.addProduct}>Add product</button>
         </div>);
     }

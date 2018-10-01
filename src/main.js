@@ -57,15 +57,11 @@ class ProductsEditPage extends Component {
         });
     }
 
-    onProductAdd({ productId, productName, productPrice }){
-        const products = this.state.products.map(product => {
-            return {
-                ...product
-            };
-        });
-        products.push({ id: productId, name: productName, price: productPrice });
+    onProductAdd(product){
+        const products = [...this.state.products, product];
+        
         this.setState({
-            products,
+            products: products,
             filteredProducts: products,
         });
     };
