@@ -14,6 +14,8 @@ export default class ProductComponent extends Component {
                         </div>
                     );
                 })}
+                <button className="delete-product" onClick={this.props.onDeleteProduct}>Delete product</button>
+                <button className="change-product" onClick={this.props.onClickProduct}>Change product</button>
             </div>
         );
     }

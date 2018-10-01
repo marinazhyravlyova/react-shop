@@ -5,6 +5,7 @@ import SearchComponent from './search-component';
 import ProductListComponent from './product-list';
 import AddPropertiesComponent from './add-properties';
 import AddProductComponent from './add-product';
+import EditProductComponent from './edit-product';
 import './task';
 
 class ProductsEditPage extends Component {
@@ -15,10 +16,18 @@ class ProductsEditPage extends Component {
             searchValue: '',
             products: Products,
             filteredProducts: Products,
+            selectedProduct: {
+                id: '',
+                name: '',
+                price: '',
+            },
         };
         this.onSearchValueChange = this.onSearchValueChange.bind(this);
         this.onPropertiesChange = this.onPropertiesChange.bind(this);
         this.onProductAdd = this.onProductAdd.bind(this);
+        this.onDeleteProduct = this.onDeleteProduct.bind(this);
+        this.onClickProduct = this.onClickProduct.bind(this);
+        this.onEditProduct = this.onEditProduct.bind(this);
     }
 
     onSearchValueChange(searchValue) {
@@ -61,10 +70,41 @@ class ProductsEditPage extends Component {
         const products = [...this.state.products, product];
         
         this.setState({
-            products: products,
+            products,
             filteredProducts: products,
         });
     };
+
+    onDeleteProduct(product){
+        const products = this.state.products.filter((object) => object.id !== product.id);
+
+        this.setState({
+            products,
+            filteredProducts: products,
+        });
+    };
+
+    onClickProduct(product) {
+        this.setState({
+            selectedProduct: product,
+        });
+    };
+
+    onEditProduct(selectedProduct) {
+        const products = this.state.products.map(product => {
+            if(product.id === selectedProduct.id){
+                return selectedProduct;
+            }
+            return {
+                ...product
+            };
+        });
+        this.setState({
+            selectedProduct: '',
+            products,
+            filteredProducts: products,
+        });
+    }
     
     render() {
         return (
@@ -78,9 +118,15 @@ class ProductsEditPage extends Component {
                 />
                 <ProductListComponent
                     products={this.state.filteredProducts}
+                    onDeleteProduct={this.onDeleteProduct}
+                    onClickProduct={this.onClickProduct}
                 />
                 <AddProductComponent
                     addProduct={this.onProductAdd}
+                />
+                <EditProductComponent
+                    product={this.state.selectedProduct}
+                    editProduct={this.onEditProduct}
                 />
             </div>
         );
