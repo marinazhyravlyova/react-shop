@@ -23,7 +23,7 @@ export default class AddProductComponent extends Component{
     addProduct(){
         this.props.addProduct({ ...this.state });
     }
-
+    
     render() {
         return(<div>
             <span>Product id: </span>

@@ -3,13 +3,18 @@ import ProductComponent from '../product-component';
 
 export default class ProductListComponent extends Component {
     render() {
-        const products = this.props.products;
-        
+        const { products, onDeleteProduct, onClickProduct } = this.props;
+
         return (
             <div className='product-list'>
-                {(products || []).map((product, index) => {
-                    return <ProductComponent product={product} key={index} />
-                })}
+                {(products || []).map((product, index) => (
+                    <ProductComponent
+                        product={product}
+                        onDeleteProduct={() => onDeleteProduct(product)}
+                        onClickProduct={() => onClickProduct(product)}
+                        key={index}
+                    />)
+                )}
             </div>
         )
     }
