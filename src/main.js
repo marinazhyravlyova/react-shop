@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Products from '../public/product';
 import SearchComponent from './search-component';
@@ -6,6 +6,7 @@ import ProductListComponent from './product-list';
 import AddPropertiesComponent from './add-properties';
 import AddProductComponent from './add-product';
 import EditProductComponent from './edit-product';
+import SortTollBarComponent from './sort-tool-bar';
 import './task';
 
 class ProductsEditPage extends Component {
@@ -21,6 +22,8 @@ class ProductsEditPage extends Component {
                 name: '',
                 price: '',
             },
+            property: '',
+            sortingType: true,
         };
         this.onSearchValueChange = this.onSearchValueChange.bind(this);
         this.onPropertiesChange = this.onPropertiesChange.bind(this);
@@ -28,6 +31,7 @@ class ProductsEditPage extends Component {
         this.onDeleteProduct = this.onDeleteProduct.bind(this);
         this.onClickProduct = this.onClickProduct.bind(this);
         this.onEditProduct = this.onEditProduct.bind(this);
+        this.sortProducts = this.sortProducts.bind(this);
     }
 
     onSearchValueChange(searchValue) {
@@ -52,30 +56,30 @@ class ProductsEditPage extends Component {
             return !!propertyName;
         });
     }
-    
-    onPropertiesChange({ propertyName, propertyValue }) {
+
+    onPropertiesChange({propertyName, propertyValue}) {
         const products = this.state.products.map(product => {
-                    return {
-                        ...product,
-                        [propertyName]: propertyValue,
-                    };
-                });
+            return {
+                ...product,
+                [propertyName]: propertyValue,
+            };
+        });
         this.setState({
             products,
             filteredProducts: products,
         });
     }
 
-    onProductAdd(product){
+    onProductAdd(product) {
         const products = [...this.state.products, product];
-        
+
         this.setState({
             products,
             filteredProducts: products,
         });
     };
 
-    onDeleteProduct(product){
+    onDeleteProduct(product) {
         const products = this.state.products.filter((object) => object.id !== product.id);
 
         this.setState({
@@ -92,7 +96,7 @@ class ProductsEditPage extends Component {
 
     onEditProduct(selectedProduct) {
         const products = this.state.products.map(product => {
-            if(product.id === selectedProduct.id){
+            if (product.id === selectedProduct.id) {
                 return selectedProduct;
             }
             return {
@@ -105,7 +109,24 @@ class ProductsEditPage extends Component {
             filteredProducts: products,
         });
     }
-    
+
+    sortProducts(property, sortingType) {
+        let sortedProducts;
+        const { products } = this.state;
+
+        if (sortingType) {
+            sortedProducts = products.sort((current, next) => (current[property] > next[property]));
+        } else {
+            sortedProducts = products.sort((current, next) => (current[property] < next[property]));
+        }
+
+        this.setState({
+            property,
+            filteredProducts: sortedProducts,
+            sortingType
+        });
+    }
+
     render() {
         return (
             <div className='application'>
@@ -127,6 +148,10 @@ class ProductsEditPage extends Component {
                 <EditProductComponent
                     product={this.state.selectedProduct}
                     editProduct={this.onEditProduct}
+                />
+                <SortTollBarComponent
+                    properties={Object.keys(this.state.products[0])}
+                    sortProducts={this.sortProducts}
                 />
             </div>
         );
