@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ProductComponent extends Component {
     render() {
@@ -15,7 +16,9 @@ export default class ProductComponent extends Component {
                     );
                 })}
                 <button className="delete-product" onClick={this.props.onDeleteProduct}>Delete product</button>
-                <button className="change-product" onClick={this.props.onClickProduct}>Change product</button>
+                <Link to={`/product/${product.id}`}>
+                    <button className="change-product" onClick={this.props.onClickProduct}>Change product</button>
+                </Link>
             </div>
         );
     }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import store from "../../store";
 
 export default class AddProductComponent extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             id: '',
             name: '',
@@ -21,7 +22,10 @@ export default class AddProductComponent extends Component{
     }
 
     addProduct(){
-        this.props.addProduct({ ...this.state });
+        const { products } = store.getState();
+        const productsWithNewProduct = [...products, this.state];
+        
+        store.setState({ products: productsWithNewProduct });
     }
     
     render() {
