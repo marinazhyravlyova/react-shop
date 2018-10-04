@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import store from '../../store';
 
 export default class EditProductComponent extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        const { productId } = props.match.params;
+        const { products } = store.getState();
+        const product = products.find(product => product.id == productId);
         
         this.state = {
-            product: {
-                id: '',
-                name: '',
-                price: '',
-            }
+            product,
         };
 
         this.onProductPropertyChange = this.onProductPropertyChange.bind(this);
@@ -34,14 +34,24 @@ export default class EditProductComponent extends Component {
     }
 
     editProduct() {
-        this.props.editProduct(this.state.product);
+        const selectedProduct = this.state.product;
+        const { products } = store.getState();
+        const updatedProducts = products.map(product => {
+            if (product.id === selectedProduct.id) {
+                return selectedProduct;
+            }
+            return {
+                ...product
+            };
+        });
+        store.setState({ products: updatedProducts });
     }
 
     render() {
         return(<div>
             <span>Edit product id: </span>
             <input
-                value={this.props.product.id}
+                value={this.state.product.id}
             />
             <span>Edit product name: </span>
             <input

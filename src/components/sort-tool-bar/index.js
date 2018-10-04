@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ToggleComponent from '../toggle';
+import ToggleComponent from '../toggle/index';
 
 export default class SortTollBarComponent extends Component {
     constructor(props) {
