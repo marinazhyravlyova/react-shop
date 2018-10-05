@@ -1,0 +1,15 @@
+.toggle{
+
+    .toggle-button{
+        cursor: pointer;
+        background-color: white;
+        border: white;
+        
+        img{
+            width: 30px;
+        }
+    }
+    .toggle-button:focus {
+        outline: none;
+    }
+}

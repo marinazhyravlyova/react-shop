@@ -3,6 +3,7 @@ import SearchComponent from '../../components/search-component';
 import ProductListComponent from '../../components/product-list';
 import SortTollBarComponent from '../../components/sort-tool-bar';
 import store from '../../store';
+import './style.scss';
 
 export default class MainPage extends Component {
     constructor(...rest) {
@@ -124,18 +125,19 @@ export default class MainPage extends Component {
     render() {
         return (
             <div className='application'>
+                <div className="title">All products</div>
                 <SearchComponent
                     searchValue={this.state.searchValue}
                     searchValueChange={this.onSearchValueChange}
+                />
+                <SortTollBarComponent
+                    properties={Object.keys(this.state.products[0])}
+                    sortProducts={this.sortProducts}
                 />
                 <ProductListComponent
                     products={this.state.filteredProducts}
                     onDeleteProduct={this.onDeleteProduct}
                     onClickProduct={this.onClickProduct}
-                />
-                <SortTollBarComponent
-                    properties={Object.keys(this.state.products[0])}
-                    sortProducts={this.sortProducts}
                 />
             </div>
         );

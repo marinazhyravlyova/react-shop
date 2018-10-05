@@ -1,17 +1,58 @@
 [
-  {
-    "id": 0,
-    "name": "Super-product",
-    "price": 500
-  },
-  {
-    "id": 1,
-    "name": "A-New-product",
-    "price": 700
-  },
-  {
-    "id": 2,
-    "name": "Good-product",
-    "price": 300
-  }
+    {
+        "id": 0,
+        "name": "Polo Ralph Lauren",
+        "description": "Impeccably tailored in Italy from lightweight navy wool.",
+        "price":  "€800",
+        "url": "https://demos.creative-tim.com/material-kit-pro-react/static/media/suit-1.389ce91c.jpg"
+    },
+    {
+        "id": 1,
+        "name": "Wooyoungmi",
+        "description": "Dark-grey slub wool, pintucked notch lapels.",
+        "price":  " €555",
+        "url": "https://demos.creative-tim.com/material-kit-pro-react/static/media/suit-2.d5ddfb28.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Tom Ford",
+        "description": "Immaculate tailoring is TOM FORD's forte.",
+        "price":  " €879",
+        "url": "https://demos.creative-tim.com/material-kit-pro-react/static/media/suit-3.67dee7be.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Kingsman",
+        "description": "Crafted from khaki cotton and fully canvassed.",
+        "price":  " €725",
+        "url": "https://demos.creative-tim.com/material-kit-pro-react/static/media/suit-5.9611da41.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Thom Sweeney",
+        "description": "It's made from lightweight grey wool woven.",
+        "price":  " €680",
+        "url": "https://demos.creative-tim.com/material-kit-pro-react/static/media/suit-4.369298a4.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Boglioli",
+        "description": "Masterfully crafted in Northern Italy.",
+        "price":  " €699",
+        "url": "https://demos.creative-tim.com//material-kit-pro-react/static/media/suit-6.ba2bff5e.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Polo Ralph Lauren",
+        "description": "Impeccably tailored in Italy from lightweight navy wool.",
+        "price":  "€800",
+        "url": "https://demos.creative-tim.com/material-kit-pro-react/static/media/suit-1.389ce91c.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Wooyoungmi",
+        "description": "Dark-grey slub wool, pintucked notch lapels.",
+        "price":  " €555",
+        "url": "https://demos.creative-tim.com/material-kit-pro-react/static/media/suit-2.d5ddfb28.jpg"
+    }
 ]

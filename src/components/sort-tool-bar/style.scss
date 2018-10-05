@@ -1,0 +1,14 @@
+.sort-products{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    
+    .sorting-name{
+        cursor: pointer;
+        height: 39px;
+        font-size: 19px;
+    }
+    .sorting-name {
+        outline: none;
+    }
+}
