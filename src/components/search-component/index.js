@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './style.scss';
 
 export default class SearchComponent extends Component {
     constructor(...rest) {
@@ -16,12 +17,13 @@ export default class SearchComponent extends Component {
     render() {
         return (
             <div className='search-component'>
-                <label>Search:</label>
-                <input
-                    value={this.props.searchValue}
-                    onChange={this.onSearchValueChange}
-                    placeholder='type for search'
-                />
+                <div>
+                    <input
+                        value={this.props.searchValue}
+                        onChange={this.onSearchValueChange}
+                        placeholder='Type for search'
+                    />
+                </div>
             </div>
         );
     }

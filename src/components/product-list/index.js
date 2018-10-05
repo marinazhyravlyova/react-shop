@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ProductComponent from '../product-component';
+import './style.scss';
 
 export default class ProductListComponent extends Component {
     render() {

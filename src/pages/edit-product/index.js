@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import store from '../../store';
+import './style.scss';
 
 export default class EditProductComponent extends Component {
     constructor(props) {
@@ -48,22 +49,45 @@ export default class EditProductComponent extends Component {
     }
 
     render() {
-        return(<div>
-            <span>Edit product id: </span>
-            <input
-                value={this.state.product.id}
-            />
-            <span>Edit product name: </span>
-            <input
-                value={this.state.product.name}
-                onChange={(event) => this.onProductPropertyChange(event, 'name')}
-            />
-            <span>Edit product price: </span>
-            <input
-                value={this.state.product.price}
-                onChange={(event) => this.onProductPropertyChange(event, 'price')}
-            />
-            <button onClick={this.editProduct}>Edit product</button>
+        return(<div className="edit-product">
+            <div className="title">Edit product</div>
+            <div className="edit-container">
+                <div className="edit-field">
+                    <span>Edit product id: </span>
+                    <input
+                        value={this.state.product.id}
+                    />
+                </div>
+                <div className="edit-field">
+                    <span>Edit name: </span>
+                    <input
+                        value={this.state.product.name}
+                        onChange={(event) => this.onProductPropertyChange(event, 'name')}
+                    />
+                </div>
+                <div className="edit-field">
+                    <span>Edit price: </span>
+                    <input
+                        value={this.state.product.description}
+                        onChange={(event) => this.onProductPropertyChange(event, 'description')}
+                    />
+                </div>
+                <div className="edit-field">
+                    <span>Edit price: </span>
+                    <input
+                        value={this.state.product.price}
+                        onChange={(event) => this.onProductPropertyChange(event, 'price')}
+                    />
+                </div>
+                <div className="edit-field">
+                    <span>Edit url of image: </span>
+                    <input
+                        value={this.state.product.url}
+                        onChange={(event) => this.onProductPropertyChange(event, 'url')}
+                    />
+                </div>
+            </div>
+            <button className="edit-product" onClick={this.editProduct}>Edit product</button>
         </div>);
     }
 }

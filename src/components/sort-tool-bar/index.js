@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ToggleComponent from '../toggle/index';
+import './style.scss';
 
 export default class SortTollBarComponent extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export default class SortTollBarComponent extends Component {
 
     render() {
         return (
-            <div>
+            <div className="sort-products">
                 <select className='sorting-name' onChange={this.changeOption}>
                     {(this.props.properties || []).map((property, index) => (
                         <option

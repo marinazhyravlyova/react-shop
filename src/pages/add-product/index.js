@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import store from "../../store";
+import './style.scss';
 
 export default class AddProductComponent extends Component{
     constructor(props) {
@@ -7,7 +8,9 @@ export default class AddProductComponent extends Component{
         this.state = {
             id: '',
             name: '',
+            description: '',
             price: '',
+            url: ''
         };
         this.onProductPropertyChange = this.onProductPropertyChange.bind(this);
         this.addProduct = this.addProduct.bind(this);
@@ -29,23 +32,49 @@ export default class AddProductComponent extends Component{
     }
     
     render() {
-        return(<div>
-            <span>Product id: </span>
-            <input
-                value={this.state.id}
-                onChange={(event) => this.onProductPropertyChange(event, 'id')}
-            />
-            <span>Product name: </span>
-            <input
-                value={this.state.name}
-                onChange={(event) => this.onProductPropertyChange(event, 'name')}
-            />
-            <span>Product price: </span>
-            <input
-                value={this.state.price}
-                onChange={(event) => this.onProductPropertyChange(event, 'price')}
-            />
-            <button onClick={this.addProduct}>Add product</button>
+        return(<div className="new-product">
+            <div className="title">Add new product</div>
+            <div className="product-container">
+                <div className="field-fill">
+                    <span>Product id: </span>
+                    <input
+                        value={this.state.id}
+                        onChange={(event) => this.onProductPropertyChange(event, 'id')}
+                    />
+                </div>
+                
+                <div className="field-fill">
+                    <span>Product name: </span>
+                    <input
+                        value={this.state.name}
+                        onChange={(event) => this.onProductPropertyChange(event, 'name')}
+                    />
+                </div>
+                <div className="field-fill">
+                    <span>Product description: </span>
+                    <input
+                        value={this.state.description}
+                        onChange={(event) => this.onProductPropertyChange(event, 'description')}
+                    />
+                </div>
+                <div className="field-fill">
+                    <span>Product price: </span>
+                    <input
+                        value={this.state.price}
+                        onChange={(event) => this.onProductPropertyChange(event, 'price')}
+                    />
+                </div>
+                <div className="field-fill">
+                    <span>Product img(url): </span>
+                    <input
+                        value={this.state.url}
+                        onChange={(event) => this.onProductPropertyChange(event, 'url')}
+                    />
+                </div>
+                
+               
+            </div>
+            <button className="btn-add-product" onClick={this.addProduct}>Add product</button>
         </div>);
     }
 }
