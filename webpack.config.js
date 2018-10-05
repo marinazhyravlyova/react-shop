@@ -1,10 +1,14 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
     entry: {
         main: './src/main.js',
     },
+    target: 'web',
+    context: path.resolve(__dirname, ''),
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, './dist'),
@@ -21,7 +25,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                 }
@@ -29,15 +33,13 @@ module.exports = {
             {
                 test: /\.(scss|css)$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    'css-loader',
                     {
-                        loader: 'css-loader',
+                        loader: 'postcss-loader',
                         options: {
-                            url: true,
-                            minimize: {
-                                safe: true,
-                            },
-                        },
+                            plugins: () => [require('autoprefixer')]
+                        }
                     },
                     'sass-loader',
                 ],
@@ -45,7 +47,16 @@ module.exports = {
         ]
     },
     plugins: [
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: devMode ? '[name].css' : '[name].[hash].css',
+            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+        }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.IgnorePlugin(/^codemirror$/),
+        new webpack.SourceMapDevToolPlugin({
+            filename: '[name].js.map'
+        }),
     ],
     devtool: "source-map"
 };
