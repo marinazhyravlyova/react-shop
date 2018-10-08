@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import store from "../../store";
 import './style.scss';
+import { addProduct } from '../../action';
 
 export default class AddProductComponent extends Component{
     constructor(props) {
@@ -25,10 +26,7 @@ export default class AddProductComponent extends Component{
     }
 
     addProduct(){
-        const { products } = store.getState();
-        const productsWithNewProduct = [...products, this.state];
-        
-        store.setState({ products: productsWithNewProduct });
+        store.dispatch(addProduct(this.state));
     }
     
     render() {

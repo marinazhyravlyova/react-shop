@@ -1,17 +1,13 @@
 import React, {Component} from 'react';
 import { Switch, Route } from 'react-router';
-import MainPage from './pages/main';
+import MainPage from './pages/main/container';
 import AddProductPage from './pages/add-product';
-import EditProductPage from './pages/edit-product';
-import Products from '../public/product.json';
+import EditProductPage from './pages/edit-product/container';
 import Header from "./components/header";
-import store from './store';
 
 export default class App extends Component {
     constructor(props) {
         super(props);
-
-        store.setState({products: Products});
     }
 
     render() {
