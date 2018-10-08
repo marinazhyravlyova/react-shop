@@ -10,17 +10,11 @@ export default class MainPage extends Component {
         
         this.state = {
             searchValue: '',
-            filteredProducts: [],
-            selectedProduct: {
-                id: '',
-                name: '',
-                price: '',
-            },
+            filteredProducts: props.products,
             property: '',
             sortingType: true,
         };
         this.onSearchValueChange = this.onSearchValueChange.bind(this);
-        this.onPropertiesChange = this.onPropertiesChange.bind(this);
         this.onClickProduct = this.onClickProduct.bind(this);
         this.sortProducts = this.sortProducts.bind(this);
     }
@@ -55,19 +49,6 @@ export default class MainPage extends Component {
                 });
 
             return !!propertyName;
-        });
-    }
-
-    onPropertiesChange({propertyName, propertyValue}) {
-        const products = this.props.products.map(product => {
-            return {
-                ...product,
-                [propertyName]: propertyValue,
-            };
-        });
-        this.setState({
-            products,
-            filteredProducts: products,
         });
     }
 

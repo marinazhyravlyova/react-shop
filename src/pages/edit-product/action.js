@@ -4,8 +4,9 @@ import {
     SET_DESCRIPTION,
     SET_PRICE,
     SET_URL,
-    SET_VALIDATION_STATE_PRICE,
+    SET_VALIDATION_STATE_PRICE, SET_PRODUCTS,
 } from "../../action-types";
+import { updateProduct } from '../../action';
 
 const isNumeric = (str) => /^\d+$/.test(str);
 
@@ -65,5 +66,20 @@ export const fetchProduct = (productId) => (dispatch, getState) => {
 };
 
 export const saveProduct = () => (dispatch, getState) => {
-    
+    const state = getState();
+    const {
+        id, 
+        name,
+        description,
+        price,
+        url,
+    } = state.editProduct;
+    const product = {
+        id,
+        name,
+        description,
+        price,
+        url,
+    };
+    dispatch(updateProduct(product));
 };

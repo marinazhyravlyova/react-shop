@@ -3,7 +3,6 @@ import {
     DELETE_PRODUCT,
     SET_PRODUCTS,
     UPDATE_PRODUCT,
-    SET_PRODUCT,
 } from "./action-types";
 import Products from '../public/product.json';
 
@@ -28,5 +27,10 @@ export const deleteProduct = product => ({
 });
 
 export const fetchProducts = () => (dispatch, getState) => {
-    dispatch(setProducts(Products));
+    const state = getState();
+    const { products } = state.main;
+    
+    if (products.length === 0) {
+        dispatch(setProducts(Products));
+    }
 };

@@ -9,3 +9,10 @@ export const SET_DESCRIPTION = 'SET_DESCRIPTION';
 export const SET_PRICE = 'SET_PRICE';
 export const SET_URL = 'SET_URL';
 export const SET_VALIDATION_STATE_PRICE = 'SET_VALIDATION_STATE_PRICE';
+
+export const ADD_ID = 'ADD_ID';
+export const ADD_NAME = 'ADD_NAME';
+export const ADD_DESCRIPTION = 'ADD_DESCRIPTION';
+export const ADD_PRICE = 'ADD_PRICE';
+export const ADD_URL = 'ADD_URL';
+export const ADD_VALIDATION_STATE_PRICE = 'ADD_VALIDATION_STATE_PRICE';

@@ -10,8 +10,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onDeleteProduct: product => dispatch(deleteProduct(product)),
     fetchProducts: () => dispatch(fetchProducts()),
+    onDeleteProduct: product => dispatch(deleteProduct(product)),
 });
 
 export default connect(

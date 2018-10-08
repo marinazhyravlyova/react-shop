@@ -9,7 +9,8 @@ import {
     SET_PRODUCTS,
     DELETE_PRODUCT,
 } from './action-types';
-import editProductReducer  from './pages/edit-product/reducer'; 
+import editProductReducer  from './pages/edit-product/reducer';
+import addProductReducer  from './pages/add-product/reducer';
 
 let initialState = {
     products: [],
@@ -64,6 +65,7 @@ const applicationReducer = (state = initialState, action) => {
 export default createStore(
     combineReducers({
         editProduct: editProductReducer,
+        addProduct: addProductReducer,
         main: applicationReducer,
     }),
     routerReducer,

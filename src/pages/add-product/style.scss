@@ -12,7 +12,7 @@
     .product-container{
         width: 100%;
         display: flex;
-        justify-content: center;
+        flex-wrap: wrap;
         margin-top: 20px;
         margin-bottom: 20px;
         
