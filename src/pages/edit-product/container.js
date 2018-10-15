@@ -10,6 +10,7 @@ import {
     setPrice,
     setUrl,
     saveProduct,
+    addComment,
 } from './action';
 
 const mapStateToProps = state => ({
@@ -19,6 +20,7 @@ const mapStateToProps = state => ({
     price: state.editProduct.price,
     url: state.editProduct.url,
     isValidPrice: state.editProduct.isValidPrice,
+    comments: state.editProduct.comments,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -31,6 +33,7 @@ const mapDispatchToProps = dispatch => ({
     onDescriptionChange: (event) => dispatch(setDescription(event.target.value)),
     onPriceChange: (event) => dispatch(setPrice(event.target.value)),
     onUrlChange: (event) => dispatch(setUrl(event.target.value)),
+    onCommentAdd: (comment) => dispatch(addComment(comment)),
 });
 
 export default connect(

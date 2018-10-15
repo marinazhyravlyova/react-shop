@@ -63,6 +63,6 @@ export const createProduct = () => (dispatch, getState) => {
         price,
         url,
     };
-    
+
     dispatch(addProduct(product));
 };

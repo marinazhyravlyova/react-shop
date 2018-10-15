@@ -4,7 +4,9 @@ import {
     SET_DESCRIPTION,
     SET_PRICE,
     SET_URL,
-    SET_VALIDATION_STATE_PRICE, SET_PRODUCTS,
+    SET_VALIDATION_STATE_PRICE, 
+    SET_COMMENTS,
+    ADD_COMMENT
 } from "../../action-types";
 import { updateProduct } from '../../action';
 
@@ -38,6 +40,30 @@ export const setUrl = url => ({
     url,
 });
 
+export const setComments = comments => ({
+    type: SET_COMMENTS,
+    comments,
+});
+
+export const addComment = comment => (dispatch, getState) => {
+    const state = getState();
+    const product = state.editProduct;
+    const comments = [
+        ...product.comments,
+        comment,
+    ];
+
+    dispatch(updateProduct({
+        ...product,
+        comments,
+    }));
+
+    dispatch({
+        type: ADD_COMMENT,
+        comment,
+    })
+};
+
 export const validatePrice = (price) => (dispatch) => {
     const isValid = isNumeric(price);
 
@@ -55,7 +81,8 @@ export const fetchProduct = (productId) => (dispatch, getState) => {
         name,
         description,
         price,
-        url
+        url,
+        comments, 
     } = products.find(({ id }) => id == productId);
 
     dispatch(setId(id));
@@ -63,16 +90,18 @@ export const fetchProduct = (productId) => (dispatch, getState) => {
     dispatch(setDescription(description));
     dispatch(setPrice(price));
     dispatch(setUrl(url));
+    dispatch(setComments(comments));
 };
 
 export const saveProduct = () => (dispatch, getState) => {
     const state = getState();
     const {
-        id, 
+        id,
         name,
         description,
         price,
         url,
+        comments
     } = state.editProduct;
     const product = {
         id,
@@ -80,6 +109,7 @@ export const saveProduct = () => (dispatch, getState) => {
         description,
         price,
         url,
+        comments
     };
     dispatch(updateProduct(product));
 };

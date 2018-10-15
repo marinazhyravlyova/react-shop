@@ -5,6 +5,8 @@ import {
     SET_PRICE,
     SET_URL,
     SET_VALIDATION_STATE_PRICE,
+    SET_COMMENTS,
+    ADD_COMMENT,
 } from "../../action-types";
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
     description: '',
     price: '',
     url: '',
+    comments: '',
     isValidPrice: true,
 };
 
@@ -24,7 +27,7 @@ export default (state = initialState, action) => {
                 id: action.id,
             }
         }
-        
+
         case SET_NAME: {
             return {
                 ...state,
@@ -38,25 +41,42 @@ export default (state = initialState, action) => {
                 description: action.description,
             }
         }
-        
+
         case SET_PRICE: {
             return {
                 ...state,
                 price: action.price,
             }
         }
-        
+
         case SET_URL: {
             return {
                 ...state,
                 url: action.url,
             }
         }
-        
+
         case SET_VALIDATION_STATE_PRICE: {
             return {
                 ...state,
                 isValidPrice: action.isValid,
+            }
+        }
+
+        case SET_COMMENTS: {
+            return {
+                ...state,
+                comments: action.comments,
+            }
+        }
+
+        case ADD_COMMENT: {
+            return {
+                ...state,
+                comments: [
+                    ...state.comments,
+                    action.comment,
+                ]
             }
         }
 

@@ -13,7 +13,7 @@ export default class AddProductComponent extends Component{
                         onChange={this.props.onIdChange}
                     />
                 </div>
-                
+
                 <div className="field-fill">
                     <span>Product name: </span>
                     <input
@@ -42,7 +42,7 @@ export default class AddProductComponent extends Component{
                         onChange={this.props.onUrlChange}
                     />
                 </div>
-                
+
             </div>
             <button className="btn-add-product" onClick={this.props.onSaveButtonClick}>Add product</button>
         </div>);

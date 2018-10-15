@@ -29,7 +29,7 @@ export const deleteProduct = product => ({
 export const fetchProducts = () => (dispatch, getState) => {
     const state = getState();
     const { products } = state.main;
-    
+
     if (products.length === 0) {
         dispatch(setProducts(Products));
     }

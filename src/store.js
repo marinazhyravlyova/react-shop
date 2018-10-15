@@ -15,6 +15,28 @@ import addProductReducer  from './pages/add-product/reducer';
 let initialState = {
     products: [],
     product: {},
+    comments: [
+        {
+            id: 0,
+            productId: 3,
+            content: 'This is a very good jacket. I am very pleased with the purchase.',
+        },
+        {
+            id: 1,
+            productId: 1,
+            content: 'This is a very good jacket.',
+        },
+        {
+            id: 2,
+            productId: 3,
+            content: 'This is a very nice jacket.',
+        },
+        {
+            id: 3,
+            productId: 4,
+            content: 'This is a very beautiful jacket.',
+        },
+    ],
 };
 
 const applicationReducer = (state = initialState, action) => {
