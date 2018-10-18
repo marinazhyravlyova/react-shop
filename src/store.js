@@ -11,13 +11,14 @@ import {
 } from './action-types';
 import editProductReducer  from './pages/edit-product/reducer';
 import addProductReducer  from './pages/add-product/reducer';
+import basketReducer  from './pages/basket/reducer';
 
 let initialState = {
     products: [],
     product: {},
     comments: [
         {
-            id: 0,
+             id: 0,
             productId: 3,
             content: 'This is a very good jacket. I am very pleased with the purchase.',
         },
@@ -88,7 +89,8 @@ export default createStore(
     combineReducers({
         editProduct: editProductReducer,
         addProduct: addProductReducer,
-        main: applicationReducer,
+        basket: basketReducer,
+        main: applicationReducer,     
     }),
     routerReducer,
     applyMiddleware(

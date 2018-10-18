@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router';
 import MainPage from './pages/main/container';
 import AddProductPage from './pages/add-product/container';
 import EditProductPage from './pages/edit-product/container';
+import BasketPage from "./pages/basket/container";
 import Header from "./components/header";
 
 export default class App extends Component {
@@ -18,6 +19,7 @@ export default class App extends Component {
                     <Route exact path='/' component={MainPage}/>
                     <Route path='/product/new' component={AddProductPage}/>
                     <Route path='/product/:productId' component={EditProductPage}/>
+                    <Route path='/basket' component={BasketPage}/>
                 </Switch>
             </div>
         );

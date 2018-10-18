@@ -7,7 +7,7 @@ import './style.scss';
 export default class MainPage extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             searchValue: '',
             filteredProducts: props.products,
@@ -18,7 +18,7 @@ export default class MainPage extends Component {
         this.onClickProduct = this.onClickProduct.bind(this);
         this.sortProducts = this.sortProducts.bind(this);
     }
-    
+
     componentDidMount() {
         this.props.fetchProducts();
     }
@@ -52,11 +52,12 @@ export default class MainPage extends Component {
         });
     }
 
-    onClickProduct(product) {};
+    onClickProduct(product) {
+    };
 
     sortProducts(property, sortingType) {
         let sortedProducts;
-        const { products } = this.state;
+        const {products} = this.state;
 
         if (sortingType) {
             sortedProducts = products.sort((current, next) => (current[property] > next[property]));
@@ -87,9 +88,9 @@ export default class MainPage extends Component {
                     products={this.state.filteredProducts}
                     onDeleteProduct={this.props.onDeleteProduct}
                     onClickProduct={this.onClickProduct}
+                    addProductIdToBasket={this.props.addProductIdToBasket}
                 />
             </div>
         );
     }
 }
-

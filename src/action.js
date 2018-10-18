@@ -26,6 +26,7 @@ export const deleteProduct = product => ({
     product,
 });
 
+
 export const fetchProducts = () => (dispatch, getState) => {
     const state = getState();
     const { products } = state.main;
