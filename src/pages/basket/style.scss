@@ -1,0 +1,32 @@
+.product-basket {
+    width: 25%;
+    transition: background-color linear 0.1s;
+    border-radius: 5px;
+
+    .container-basket {
+        margin: 30px;
+
+        .product-img {
+            width: 85%;
+        }
+        .product-name {
+            margin-top: 5px;
+
+            span {
+                font-size: 20px;
+                font-weight: 700;
+                margin-top: 30px;
+            }
+        }
+
+        .product-description {
+            color: #999;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+        .product-price {
+            color: #999;
+            font-size: 20px;
+        }
+    }
+}

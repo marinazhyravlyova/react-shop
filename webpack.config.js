@@ -54,9 +54,6 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.IgnorePlugin(/^codemirror$/),
-        new webpack.SourceMapDevToolPlugin({
-            filename: '[name].js.map'
-        }),
     ],
     devtool: "source-map"
 };
