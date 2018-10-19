@@ -13,7 +13,7 @@ export default class BasketComponent extends Component{
                 {(this.props.productsInBasket || []).map((product, index) =>
                     <ProductBasket
                         product={product}
-                        onDeleteProductInBasket={() => this.props.onDeleteProductInBasket(product)}
+                        deleteProduct={() => this.props.deleteProduct(product)}
                         key={index}
                     />
                 )}

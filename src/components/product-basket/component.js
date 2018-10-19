@@ -20,7 +20,7 @@ export default class ProductBasket extends Component {
                     <div>
                         <span className="product-price">{product.price}</span>
                     </div>
-                    <button className="delete-product" onClick={this.props.onDeleteProductInBasket}>X</button>
+                    <button className="delete-product" onClick={this.props.deleteProduct}>X</button>
                 </div>
             </div>
         );

@@ -2,9 +2,8 @@ import  { connect } from 'react-redux';
 import BasketComponent from './component';
 import {
     fetchProducts,
-    onDeleteProductInBasket
+    deleteProduct
 } from './action';
-import {deleteProduct} from "../../action";
   
 const mapStateToProps = state => ({
     productsInBasket: state.basket.productsInBasket,
@@ -12,7 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchProducts: () => dispatch(fetchProducts()),
-    onDeleteProductInBasket: product => dispatch(onDeleteProductInBasket(product)),
+    deleteProduct: product => dispatch(deleteProduct(product)),
 });
 
 export default connect(

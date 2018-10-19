@@ -14,7 +14,7 @@ export const setProductsInBasket = products => ({
     products,
 });
 
-export const onDeleteProductInBasket = product => ({
+export const deleteProduct = product => ({
     type: BASKET_DELETE_PRODUCT_ID,
     product,
 });
