@@ -1,6 +1,7 @@
 import {
     BASKET_ADD_PRODUCT_ID,
     BASKET_SET_PRODUCTS,
+    BASKET_DELETE_PRODUCT_ID
 } from '../../action-types'
 
 export const addProductIdToBasket = product => ({
@@ -11,6 +12,11 @@ export const addProductIdToBasket = product => ({
 export const setProductsInBasket = products => ({
     type: BASKET_SET_PRODUCTS,
     products,
+});
+
+export const deleteProduct = product => ({
+    type: BASKET_DELETE_PRODUCT_ID,
+    product,
 });
 
 export const fetchProducts = () => (dispatch, getState) => {
