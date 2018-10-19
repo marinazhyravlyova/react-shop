@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Link from "react-router-dom/es/Link";
 import './style.scss';
+import ProductBasket from "../../components/product-basket/component";
 
 export default class BasketComponent extends Component{
     componentDidMount() {
@@ -11,22 +11,11 @@ export default class BasketComponent extends Component{
         return(
             <div className="basket">
                 {(this.props.productsInBasket || []).map((product, index) =>
-                    <div className='product-basket' key={index}>
-                        <div className='container-basket'>
-                            <Link to={`/product/${product.id}`}>
-                                <div className='product-name'>
-                                    <span>{product.name}</span>
-                                </div>
-                                <img className='product-img' src={product.url}/>
-                            </Link>
-                            <div className='product-description'>
-                                <span>{product.description}</span>
-                            </div>
-                            <div>
-                                <span className="product-price">{product.price}</span>
-                            </div>
-                        </div>
-                    </div>
+                    <ProductBasket
+                        product={product}
+                        onDeleteProductInBasket={() => this.props.onDeleteProductInBasket(product)}
+                        key={index}
+                    />
                 )}
             </div>
         )
