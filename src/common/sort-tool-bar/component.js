@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ToggleComponent from '../toggle/index';
+import ToggleComponent from '../toggle/component';
 import './style.scss';
 
 export default class SortTollBarComponent extends Component {

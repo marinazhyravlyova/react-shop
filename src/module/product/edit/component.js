@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import AddCommentComponent from './../../components/add-comment/component'
-import CommentsComponent from './../../components/comments/component'
+import AddCommentComponent from '../../comment/add/component'
+import CommentsComponent from '../../comment/list/component'
 import './style.scss';
 
 export default class EditProductComponent extends Component {

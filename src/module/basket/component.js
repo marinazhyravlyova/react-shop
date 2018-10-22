@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './style.scss';
-import ProductBasket from "../../components/product-basket/component";
+import ProductBasket from "./product/component";
 
 export default class BasketComponent extends Component{
     componentDidMount() {

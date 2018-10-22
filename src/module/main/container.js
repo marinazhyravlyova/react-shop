@@ -3,7 +3,7 @@ import MainComponent from './component';
 import {
     fetchProducts,
     deleteProduct,
-} from '../../action';
+} from '../product/action';
 import {addProductIdToBasket} from '../basket/action'
 
 const mapStateToProps = state => ({

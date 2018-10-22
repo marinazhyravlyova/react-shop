@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import BasketItemsContainer from "../../module/basket/item/container";
 import './style.scss';
-import BasketItemsContainer from "../../components/items-basket/container";
 
 export default class HeaderComponent extends Component{
     constructor() {

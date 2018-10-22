@@ -5,8 +5,8 @@ import {
     ADD_PRICE,
     ADD_URL,
     ADD_VALIDATION_STATE_PRICE,
-} from "../../action-types";
-import { addProduct } from '../../action';
+} from "../../../action-types";
+import { addProduct } from '../action';
 
 const isNumeric = (str) => /^\d+$/.test(str);
 

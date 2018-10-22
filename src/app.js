@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { Switch, Route } from 'react-router';
-import MainPage from './pages/main/container';
-import AddProductPage from './pages/add-product/container';
-import EditProductPage from './pages/edit-product/container';
-import BasketPage from "./pages/basket/container";
-import Header from "./components/header";
+import MainPage from './module/main/container';
+import AddProductPage from './module/product/add/container';
+import EditProductPage from './module/product/edit/container';
+import BasketPage from "./module/basket/container";
+import Header from "./common/header/component";
 
 export default class App extends Component {
     constructor(props) {

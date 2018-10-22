@@ -7,8 +7,8 @@ import {
     SET_VALIDATION_STATE_PRICE, 
     SET_COMMENTS,
     ADD_COMMENT
-} from "../../action-types";
-import { updateProduct } from '../../action';
+} from "../../../action-types";
+import { updateProduct } from '../action';
 
 const isNumeric = (str) => /^\d+$/.test(str);
 

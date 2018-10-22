@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import SearchComponent from '../../components/search-component';
-import ProductListComponent from '../../components/product-list';
-import SortTollBarComponent from '../../components/sort-tool-bar';
+import SearchComponent from '../../common/search/component';
+import ProductListComponent from '../product/list/component';
+import SortTollBarComponent from '../../common/sort-tool-bar/component';
 import './style.scss';
 
 export default class MainPage extends Component {

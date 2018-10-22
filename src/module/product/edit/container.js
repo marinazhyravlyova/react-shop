@@ -2,7 +2,7 @@ import  { connect } from 'react-redux';
 import EditProductComponent from './component';
 import {
     fetchProducts,
-} from '../../action';
+} from '../action';
 import {
     fetchProduct,
     setName,

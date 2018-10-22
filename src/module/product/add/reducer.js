@@ -5,7 +5,7 @@ import {
     ADD_PRICE,
     ADD_URL,
     ADD_VALIDATION_STATE_PRICE,
-} from "../../action-types";
+} from "../../../action-types";
 
 const initialState = {
     id: '',

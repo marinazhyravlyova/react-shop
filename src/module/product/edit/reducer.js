@@ -7,7 +7,7 @@ import {
     SET_VALIDATION_STATE_PRICE,
     SET_COMMENTS,
     ADD_COMMENT,
-} from "../../action-types";
+} from "../../../action-types";
 
 const initialState = {
     id: '',

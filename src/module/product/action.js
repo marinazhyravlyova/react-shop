@@ -3,8 +3,8 @@ import {
     DELETE_PRODUCT,
     SET_PRODUCTS,
     UPDATE_PRODUCT,
-} from "./action-types";
-import Products from '../public/product.json';
+} from "../../action-types";
+import Products from '../../../public/product.json';
 
 export const setProducts = products => ({
     type: SET_PRODUCTS,

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ProductComponent from '../product-component';
+import ProductComponent from './item/component';
 import './style.scss';
 
 export default class ProductListComponent extends Component {
