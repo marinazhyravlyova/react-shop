@@ -4,11 +4,12 @@ import {
     SET_DESCRIPTION,
     SET_PRICE,
     SET_URL,
-    SET_VALIDATION_STATE_PRICE, 
+    SET_VALIDATION_STATE_PRICE,
     SET_COMMENTS,
     ADD_COMMENT
 } from "../../../action-types";
-import { updateProduct } from '../action';
+import {updateProduct} from '../action';
+import ProductService from '../../product/service';
 
 const isNumeric = (str) => /^\d+$/.test(str);
 
@@ -74,16 +75,14 @@ export const validatePrice = (price) => (dispatch) => {
 };
 
 export const fetchProduct = (productId) => (dispatch, getState) => {
-    const state = getState();
-    const { products } = state.main;
     const {
         id,
         name,
         description,
         price,
         url,
-        comments, 
-    } = products.find(({ id }) => id == productId);
+        comments,
+    } = ProductService.getProduct(productId);
 
     dispatch(setId(id));
     dispatch(setName(name));
@@ -111,5 +110,6 @@ export const saveProduct = () => (dispatch, getState) => {
         url,
         comments
     };
-    dispatch(updateProduct(product));
+
+    ProductService.updateProduct(product.id, product);
 };

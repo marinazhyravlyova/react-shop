@@ -1,12 +1,13 @@
 import {
-    BASKET_ADD_PRODUCT_ID,
+    BASKET_SET_PRODUCT_IDS,
     BASKET_SET_PRODUCTS,
-    BASKET_DELETE_PRODUCT_ID
-} from '../../action-types'
+} from '../../action-types';
+import ProductService from '../product/service';
+import BasketService from './service';
 
-export const addProductIdToBasket = product => ({
-    type: BASKET_ADD_PRODUCT_ID,
-    product,
+export const setProductIdsToBasket = productIds => ({
+    type: BASKET_SET_PRODUCT_IDS,
+    productIds,
 });
 
 export const setProductsInBasket = products => ({
@@ -14,15 +15,21 @@ export const setProductsInBasket = products => ({
     products,
 });
 
-export const deleteProduct = product => ({
-    type: BASKET_DELETE_PRODUCT_ID,
-    product,
-});
+export const addProductToBasket = product => (dispatch) => {
+    BasketService.addProductId(product.id);
+    dispatch(fetchProducts());
+};
 
-export const fetchProducts = () => (dispatch, getState) => {
-    const state = getState();
-    const {products} = state.main;
-    const productIds = state.basket.productIds;
+export const deleteProduct = (product) => (dispatch) => {
+    BasketService.deleteProductId(product.id);
+    dispatch(fetchProducts());
+};
+
+export const fetchProducts = () => (dispatch) => {
+    const products = ProductService.getProducts();
+    const productIds = BasketService.getProductIds();
+
+    
     const productsInBasket = productIds.reduce((currentProductsInBasket, productId) => {
         const product = products.find((product) => product.id === productId);
 
@@ -31,6 +38,7 @@ export const fetchProducts = () => (dispatch, getState) => {
             product,
         ];
     }, []);
-
+    
     dispatch(setProductsInBasket(productsInBasket));
+    dispatch(setProductIdsToBasket(productIds));
 };

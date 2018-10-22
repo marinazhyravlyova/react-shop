@@ -6,7 +6,7 @@ import {
     ADD_URL,
     ADD_VALIDATION_STATE_PRICE,
 } from "../../../action-types";
-import { addProduct } from '../action';
+import ProductService from '../../product/service';
 
 const isNumeric = (str) => /^\d+$/.test(str);
 
@@ -64,5 +64,5 @@ export const createProduct = () => (dispatch, getState) => {
         url,
     };
 
-    dispatch(addProduct(product));
+    ProductService.createProduct(product)
 };

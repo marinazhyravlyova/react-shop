@@ -4,7 +4,7 @@ import {
     SET_PRODUCTS,
     UPDATE_PRODUCT,
 } from "../../action-types";
-import Products from '../../../public/product.json';
+import ProductService from "./service";
 
 export const setProducts = products => ({
     type: SET_PRODUCTS,
@@ -26,12 +26,8 @@ export const deleteProduct = product => ({
     product,
 });
 
+export const fetchProducts = () => (dispatch) => {
+    const products = ProductService.getProducts();
 
-export const fetchProducts = () => (dispatch, getState) => {
-    const state = getState();
-    const { products } = state.main;
-
-    if (products.length === 0) {
-        dispatch(setProducts(Products));
-    }
+    dispatch(setProducts(products));
 };
