@@ -4,7 +4,7 @@ import {
     fetchProducts,
     deleteProduct,
 } from '../product/action';
-import {addProductIdToBasket} from '../basket/action'
+import {addProductToBasket} from '../basket/action'
 
 const mapStateToProps = state => ({
     products: state.main.products,
@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     fetchProducts: () => dispatch(fetchProducts()),
     onDeleteProduct: product => dispatch(deleteProduct(product)),
-    addProductIdToBasket: product => dispatch(addProductIdToBasket(product)),
+    addProductIdToBasket: product => dispatch(addProductToBasket(product)),
 });
 
 export default connect(
