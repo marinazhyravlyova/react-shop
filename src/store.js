@@ -12,6 +12,7 @@ import {
 import editProductReducer  from './module/product/edit/reducer';
 import addProductReducer  from './module/product/add/reducer';
 import basketReducer  from './module/basket/reducer';
+import registrationReducer  from './module/registration/add/reducer';
 
 let initialState = {
     products: [],
@@ -69,6 +70,7 @@ export default createStore(
         addProduct: addProductReducer,
         basket: basketReducer,
         main: applicationReducer,     
+        addUser: registrationReducer,     
     }),
     routerReducer,
     applyMiddleware(
