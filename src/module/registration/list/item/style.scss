@@ -1,0 +1,53 @@
+.product {
+    width: 25%;
+    transition: background-color linear 0.1s;
+    border-radius: 5px;
+    
+    &:hover {
+        background-color: #f0f0f0;
+    } 
+    
+    .product-container {
+        margin: 30px;
+        
+        button.change-product {
+            background-color: white;
+            border-color: white;
+            cursor: pointer;
+
+            .product-img{
+                width: 85%;
+            }
+            .product-name {
+                margin-top: 5px;
+                
+                span{
+                    font-size: 20px;
+                    font-weight: 700;
+                    margin-top: 30px;
+                }
+            }
+        }
+        .product-description{
+            color: #999;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+        .product-price {
+            color: #999;
+            font-size: 20px;
+        }
+        .delete-product{
+            font-size: 20px;
+            float: right;
+            padding-right: 5px;
+            cursor: pointer;
+            color: #deb7b7;
+            background-color: transparent;
+            border: none;
+        }
+        .delete-product:hover{
+            color: #f07a7a;
+        }
+    }
+}

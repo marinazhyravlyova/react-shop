@@ -75,21 +75,23 @@ export const validatePrice = (price) => (dispatch) => {
 };
 
 export const fetchProduct = (productId) => (dispatch, getState) => {
-    const {
-        id,
-        name,
-        description,
-        price,
-        url,
-        comments,
-    } = ProductService.getProduct(productId);
+    ProductService.getProduct(productId).then(response => {
+        const {
+            id,
+            name,
+            description,
+            price,
+            url,
+            comments,
+        } = response.data;
 
-    dispatch(setId(id));
-    dispatch(setName(name));
-    dispatch(setDescription(description));
-    dispatch(setPrice(price));
-    dispatch(setUrl(url));
-    dispatch(setComments(comments));
+        dispatch(setId(id));
+        dispatch(setName(name));
+        dispatch(setDescription(description));
+        dispatch(setPrice(price));
+        dispatch(setUrl(url));
+        dispatch(setComments(comments));
+    });
 };
 
 export const saveProduct = () => (dispatch, getState) => {
