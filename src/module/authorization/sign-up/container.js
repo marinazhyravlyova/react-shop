@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import RegistrationComponent from './component';
 import {
-    createUser,
+    signUp,
     addUserEmail,
     addUserName,
     addPassword,
@@ -9,16 +9,15 @@ import {
 } from './action';
 
 const mapStateToProps = state => ({
-    email: state.addUser.email,
-    name: state.addUser.name,
-    password: state.addUser.password,
-    repeatPassword: state.addUser.repeatPassword,
-    isValidPassword: state.addUser.isValidPassword,
-    users: state.addUser.users,
+    email: state.signUp.email,
+    name: state.signUp.name,
+    password: state.signUp.password,
+    repeatPassword: state.signUp.repeatPassword,
+    isValidPassword: state.signUp.isValidPassword,
 });
 
 const mapDispatchToProps = dispatch => ({
-    onAddButtonClick: () => dispatch(createUser()),
+    onAddButtonClick: () => dispatch(signUp()),
     onEmailChange: (event) => dispatch(addUserEmail(event.target.value)),
     onNameChange: (event) => dispatch(addUserName(event.target.value)),
     onPasswordChange: (event) => dispatch(addPassword(event.target.value)),

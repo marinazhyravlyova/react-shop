@@ -74,7 +74,8 @@ export const validatePrice = (price) => (dispatch) => {
     })
 };
 
-export const fetchProduct = (productId) => (dispatch, getState) => {
+export const fetchProduct = (productId) => async (dispatch) => {
+    const response = await ProductService.getProduct(productId);
     const {
         id,
         name,
@@ -82,8 +83,8 @@ export const fetchProduct = (productId) => (dispatch, getState) => {
         price,
         url,
         comments,
-    } = ProductService.getProduct(productId);
-
+    } = response.data;
+    
     dispatch(setId(id));
     dispatch(setName(name));
     dispatch(setDescription(description));

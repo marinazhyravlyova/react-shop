@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'redux-logger';
-import createHistory from 'history/createBrowserHistory';
+import history from './history';
 import {
     ADD_PRODUCT,
     UPDATE_PRODUCT,
@@ -12,7 +12,9 @@ import {
 import editProductReducer  from './module/product/edit/reducer';
 import addProductReducer  from './module/product/add/reducer';
 import basketReducer  from './module/basket/reducer';
-import registrationReducer  from './module/registration/add/reducer';
+import signUpReducer  from './module/authorization/sign-up/reducer';
+import signInReducer  from './module/authorization/sign-in/reducer';
+import authReducer  from './module/authorization/reducer';
 
 let initialState = {
     products: [],
@@ -70,11 +72,13 @@ export default createStore(
         addProduct: addProductReducer,
         basket: basketReducer,
         main: applicationReducer,     
-        addUser: registrationReducer,     
+        signUp: signUpReducer,     
+        signIn: signInReducer,
+        authReducer: authReducer,
     }),
     routerReducer,
     applyMiddleware(
-        routerMiddleware(createHistory()),
+        routerMiddleware(history),
         loggerMiddleware,
         thunkMiddleware,
     ),
