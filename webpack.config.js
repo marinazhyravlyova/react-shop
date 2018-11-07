@@ -1,7 +1,12 @@
+const os = require('os');
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HappyPack = require('happypack');
 const devMode = process.env.NODE_ENV !== 'production';
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 module.exports = {
     entry: {
@@ -21,14 +26,13 @@ module.exports = {
         hot: true,
         historyApiFallback: true,
     },
+    mode: 'development',
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.js(x?)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                }
+                use: 'happypack/loader?id=js',
             },
             {
                 test: /\.(scss|css)$/,
@@ -47,9 +51,33 @@ module.exports = {
         ]
     },
     plugins: [
+        new HappyPack({
+            id: 'js',
+            threadPool: happyThreadPool,
+            loaders: ['babel-loader'],
+        }),
+        new HtmlWebpackPlugin({
+            title: '/build',
+            hash: true,
+            template: './index.html',
+            inject: 'body',
+            filename: 'index.html',
+        }),
         new MiniCssExtractPlugin({
             filename: devMode ? '[name].css' : '[name].[hash].css',
             chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+        }),
+        new HtmlWebpackIncludeAssetsPlugin({
+            assets: ['dll/vendor.dll.js'],
+            append: false,
+            hash: true,
+        }),
+        new webpack.DllReferencePlugin({
+            context: path.resolve(__dirname),
+            manifest: require('./dll/vendor-manifest.json'),
+        }),
+        new webpack.SourceMapDevToolPlugin({
+            filename: '[name].js.map',
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),

@@ -1,6 +1,4 @@
 import {
-    ADD_PRODUCT,
-    DELETE_PRODUCT,
     SET_PRODUCTS,
     UPDATE_PRODUCT,
 } from "../../action-types";
@@ -11,23 +9,20 @@ export const setProducts = products => ({
     products,
 });
 
-export const addProduct = product => ({
-    type: ADD_PRODUCT,
-    product,
-});
-
 export const updateProduct = product => ({
     type: UPDATE_PRODUCT,
     product,
 });
 
-export const deleteProduct = product => ({
-    type: DELETE_PRODUCT,
-    product,
-});
+export const deleteProduct = product => (dispatch) => {
+    ProductService.deleteProduct(product.id).then(() => {
+        dispatch(fetchProducts());
+    });
+};
 
 export const fetchProducts = () => (dispatch) => {
-    const products = ProductService.getProducts();
-
-    dispatch(setProducts(products));
+    ProductService.getProducts().then(response => {
+        const products = response.data;
+        dispatch(setProducts(products));
+    });
 };

@@ -1,30 +1,23 @@
-import Products from '../../../public/product.json';
-let products = Products;
+import axios from 'axios';
 
 export default class ProductService {
     static getProducts() {
-        return products;
+        return axios.get('http://localhost:3000/product/all');
     }
 
     static getProduct(productId) {
-        return products.find(({ id }) => id == productId);
+        return axios.get(`http://localhost:3000/product/${productId}`);
     }
 
     static createProduct(product) {
-        products = [...products, product];
+        return axios.post(`http://localhost:3000/product`, { product });
     }
 
-    static updateProduct(id, productToUpdate) {
-        products = products.map(product => {
-            if (id === product.id) {
-                return productToUpdate;
-            }
-            
-            return product;
-        });
+    static updateProduct(productId, productToUpdate) {
+        return axios.put(`http://localhost:3000/product/${productId}`, { product: productToUpdate });
     }
 
     static deleteProduct(productId) {
-        products = products.filter(({ id }) => id !== productId);
+        return axios.delete(`http://localhost:3000/product/${productId}`);
     }
 }
