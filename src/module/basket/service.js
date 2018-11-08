@@ -1,15 +1,19 @@
-let productIds = [7, 2, 3];
+import axios from 'axios';
 
 export default class BasketService {
-    static getProductIds() {
-        return productIds;
+    static getProductIds(userId) {
+        return axios.post(`http://localhost:3000/basket`, { userId });
     }
 
-    static addProductId(productId) {
-        return productIds = [...productIds, productId];
+    static getBasketProducts(userId) {
+        return axios.post(`http://localhost:3000/basket`, { userId });
+    }
+    
+    static addProduct(productId, userId) {
+        return axios.post(`http://localhost:3000/basket/add`, { productId, userId });
     }
 
-    static deleteProductId(productId) {
-        productIds = productIds.filter( id => id !== productId);
+    static deleteProduct(productId, userId) {
+        return axios.post(`http://localhost:3000/basket/delete`, { productId, userId });
     }
 }

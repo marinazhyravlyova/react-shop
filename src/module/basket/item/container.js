@@ -3,7 +3,7 @@ import BasketItemComponent from './component';
 import {fetchProducts} from "../action";
 
 const mapStateToProps = state => ({
-    productIds: state.basket.productIds,
+    productsInBasket: state.basket.productsInBasket,
 });
 
 const mapDispatchToProps = dispatch => ({

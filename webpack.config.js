@@ -47,7 +47,28 @@ module.exports = {
                     },
                     'sass-loader',
                 ],
-            }
+            },
+            {
+                test: /\.(gif|woff|woff2|ttf|eot|otf)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name].[ext]',
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.svg$/,
+                use: [{
+                    loader: 'svg-url-loader',
+                    options: {
+                        name: './assets/img/icons/[name].[ext]',
+                        limit: 10000,
+                    },
+                }],
+            },
         ]
     },
     plugins: [

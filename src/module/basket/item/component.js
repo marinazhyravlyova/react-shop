@@ -8,7 +8,7 @@ export default class BasketComponent extends Component {
     render() {
         return (
             <div className="all-comments">
-                <span>{this.props.productIds.length}</span>
+                <span>Basket ({this.props.productsInBasket.length})</span>
             </div>
         );
     }

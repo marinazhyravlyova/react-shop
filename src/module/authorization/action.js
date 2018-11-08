@@ -43,3 +43,13 @@ export const authorize = authorizedData => async (dispatch) => {
         dispatch(stopAuthorizationProcess());
     }
 };
+
+export const signOut = () => async (dispatch) => {
+    await AuthService.signOut();
+
+    dispatch({
+        type: SET_AUTHORIZED_USER_DATA,
+        authorizedUser: null,
+    });
+    dispatch(push('/'));
+};
