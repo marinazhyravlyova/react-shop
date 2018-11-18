@@ -16,12 +16,6 @@ export default class EditProductComponent extends Component {
                 <div className="title">Edit product</div>
                 <div className="edit-container">
                     <div className="edit-field">
-                        <span>Edit product id: </span>
-                        <input
-                            value={this.props.id}
-                        />
-                    </div>
-                    <div className="edit-field">
                         <span>Edit name: </span>
                         <input
                             value={this.props.name}
@@ -47,6 +41,34 @@ export default class EditProductComponent extends Component {
                         <input
                             value={this.props.url}
                             onChange={this.props.onUrlChange}
+                        />
+                    </div>
+                    <div className="edit-field">
+                        <span>Каллории</span>
+                        <input
+                            value={this.props.calories}
+                            onChange={this.props.onСaloriesChange}
+                        />
+                    </div>
+                    <div className="edit-field">
+                        <span>Белки: </span>
+                        <input
+                            value={this.props.protein}
+                            onChange={this.props.onProteinChange}
+                        />
+                    </div>
+                    <div className="edit-field">
+                        <span>Жиры: </span>
+                        <input
+                            value={this.props.fat}
+                            onChange={this.props.onFatChange}
+                        />
+                    </div>
+                    <div className="edit-field">
+                        <span>Углеводы: </span>
+                        <input
+                            value={this.props.carbohydrates}
+                            onChange={this.props.onСarbohydratesChange}
                         />
                     </div>
                 </div>

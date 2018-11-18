@@ -50,6 +50,7 @@ export default class HeaderComponent extends Component {
                     <Link to='/basket'>
                         <BasketItemsContainer/>
                     </Link>
+                    <Link to='/healthy-food'>Healthy Food</Link>
                 </div>
             </div>
         );

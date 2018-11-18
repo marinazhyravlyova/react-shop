@@ -5,6 +5,10 @@ import {
     ADD_PRICE,
     ADD_URL,
     ADD_VALIDATION_STATE_PRICE,
+    ADD_CALORIES,
+    ADD_PROTEIN,
+    ADD_FAT,
+    ADD_CARBOHYDRATES,
 } from "../../../action-types";
 import ProductService from '../../product/service';
 
@@ -47,21 +51,45 @@ export const validatePrice = (price) => (dispatch) => {
     })
 };
 
+export const addCalories = calories => ({
+    type: ADD_CALORIES,
+    calories,
+});
+
+export const addProtein = protein => ({
+    type: ADD_PROTEIN,
+    protein,
+});
+export const addFat = fat => ({
+    type: ADD_FAT,
+    fat,
+});
+export const addСarbohydrates = carbohydrates => ({
+    type: ADD_CARBOHYDRATES,
+    carbohydrates,
+});
+
 export const createProduct = () => (dispatch, getState) => {
     const state = getState();
     const {
-        id,
         name,
         description,
         price,
         url,
+        calories,
+        protein,
+        fat,
+        carbohydrates,
     } = state.addProduct;
     const product = {
-        id,
         name,
         description,
         price,
         url,
+        calories,
+        protein,
+        fat,
+        carbohydrates,
     };
 
     ProductService.createProduct(product)

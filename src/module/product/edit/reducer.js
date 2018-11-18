@@ -7,6 +7,10 @@ import {
     SET_VALIDATION_STATE_PRICE,
     SET_COMMENTS,
     ADD_COMMENT,
+    SET_CALORIES,
+    SET_PROTEIN,
+    SET_FAT,
+    SET_CARBOHYDRATES,
 } from "../../../action-types";
 
 const initialState = {
@@ -16,6 +20,10 @@ const initialState = {
     price: '',
     url: '',
     comments: '',
+    calories: 0,
+    protein: 0,
+    fat: 0,
+    carbohydrates: 0,
     isValidPrice: true,
 };
 
@@ -60,6 +68,35 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isValidPrice: action.isValid,
+            }
+        }
+
+
+        case SET_CALORIES: {
+            return {
+                ...state,
+                calories: action.calories,
+            }
+        }
+
+        case SET_PROTEIN: {
+            return {
+                ...state,
+                protein: action.protein,
+            }
+        }
+
+        case SET_FAT: {
+            return {
+                ...state,
+                fat: action.fat,
+            }
+        }
+
+        case SET_CARBOHYDRATES: {
+            return {
+                ...state,
+                carbohydrates: action.carbohydrates,
             }
         }
 

@@ -6,7 +6,11 @@ import {
     SET_URL,
     SET_VALIDATION_STATE_PRICE,
     SET_COMMENTS,
-    ADD_COMMENT
+    ADD_COMMENT,
+    SET_CALORIES,
+    SET_PROTEIN,
+    SET_FAT,
+    SET_CARBOHYDRATES,
 } from "../../../action-types";
 import {updateProduct} from '../action';
 import ProductService from '../../product/service';
@@ -46,6 +50,24 @@ export const setComments = comments => ({
     comments,
 });
 
+export const setCalories = calories => ({
+    type: SET_CALORIES,
+    calories,
+});
+
+export const setProtein = protein => ({
+    type: SET_PROTEIN,
+    protein,
+});
+export const setFat = fat => ({
+    type: SET_FAT,
+    fat,
+});
+export const setCarbohydrates = carbohydrates => ({
+    type: SET_CARBOHYDRATES,
+    carbohydrates,
+});
+
 export const addComment = comment => (dispatch, getState) => {
     const state = getState();
     const product = state.editProduct;
@@ -82,6 +104,10 @@ export const fetchProduct = (productId) => async (dispatch) => {
         description,
         price,
         url,
+        calories,
+        protein,
+        fat,
+        carbohydrates,
         comments,
     } = response.data;
     
@@ -91,6 +117,10 @@ export const fetchProduct = (productId) => async (dispatch) => {
     dispatch(setPrice(price));
     dispatch(setUrl(url));
     dispatch(setComments(comments));
+    dispatch(setCalories(calories));
+    dispatch(setProtein(protein));
+    dispatch(setFat(fat));
+    dispatch(setCarbohydrates(carbohydrates));
 };
 
 export const saveProduct = () => (dispatch, getState) => {
@@ -101,7 +131,11 @@ export const saveProduct = () => (dispatch, getState) => {
         description,
         price,
         url,
-        comments
+        comments,
+        calories,
+        protein,
+        fat,
+        carbohydrates,
     } = state.editProduct;
     const product = {
         id,
@@ -109,7 +143,11 @@ export const saveProduct = () => (dispatch, getState) => {
         description,
         price,
         url,
-        comments
+        comments,
+        calories,
+        protein,
+        fat,
+        carbohydrates,
     };
 
     ProductService.updateProduct(product.id, product);

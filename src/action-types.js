@@ -14,6 +14,10 @@ export const SET_URL = 'SET_URL';
 export const SET_VALIDATION_STATE_PRICE = 'SET_VALIDATION_STATE_PRICE';
 export const SET_COMMENTS = 'SET_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const SET_CALORIES = 'SET_CALORIES';
+export const SET_PROTEIN = 'SET_PROTEIN';
+export const SET_FAT = 'SET_FAT';
+export const SET_CARBOHYDRATES = 'SET_CARBOHYDRATES';
 
 export const ADD_ID = 'ADD_ID';
 export const ADD_NAME = 'ADD_NAME';
@@ -21,10 +25,13 @@ export const ADD_DESCRIPTION = 'ADD_DESCRIPTION';
 export const ADD_PRICE = 'ADD_PRICE';
 export const ADD_URL = 'ADD_URL';
 export const ADD_VALIDATION_STATE_PRICE = 'ADD_VALIDATION_STATE_PRICE';
+export const ADD_CALORIES = 'ADD_CALORIES';
+export const ADD_PROTEIN = 'ADD_PROTEIN';
+export const ADD_FAT = 'ADD_FAT';
+export const ADD_CARBOHYDRATES = 'ADD_CARBOHYDRATES';
 
 export const BASKET_ADD_PRODUCT = 'BASKET_ADD_PRODUCT';
 export const BASKET_ADD_PRODUCT_ID = 'BASKET_ADD_PRODUCT_ID';
-export const BASKET_SET_PRODUCT_IDS = 'BASKET_SET_PRODUCT_IDS';
 export const BASKET_SET_PRODUCTS = 'BASKET_SET_PRODUCTS';
 
 export const ADD_USER_EMAIL = 'ADD_USER_EMAIL';
