@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 import './style.scss';
 
 class HealthyFoodComponent extends Component {
@@ -9,6 +9,7 @@ class HealthyFoodComponent extends Component {
             onNewEatingTimeNameChange,
             selectedDayId,
             selectedEatingTimeId,
+            selectedProductId,
             onDayTabClick,
             onEatingTimeClick,
             onNewEatingTimeItemClick,
@@ -19,6 +20,10 @@ class HealthyFoodComponent extends Component {
             onNewProductWeightChange,
             onNewProductAdd,
             addNewDay,
+            onSelectedProductNameChange,
+            onSelectedProductWeightChange,
+            onSelectedProductSaveClick,
+            onProductEditClick,
         } = this.props;
 
         return (
@@ -40,8 +45,8 @@ class HealthyFoodComponent extends Component {
                     </div>
                 </div>
                 {(() => {
-                    const selectedDay = (days || []).find(({ id }) => id === selectedDayId);
-                    
+                    const selectedDay = (days || []).find(({id}) => id === selectedDayId);
+
                     if (selectedDay) {
                         return (
                             <div className='selected-day'>
@@ -68,27 +73,49 @@ class HealthyFoodComponent extends Component {
                                 </div>
                                 <div className='selected-eating-time'>
                                     {(() => {
-                                        const selectedEatingTime = (selectedDay.eatingTimes || []).find(({ id }) => id === selectedEatingTimeId);
+                                        const selectedEatingTime = (selectedDay.eatingTimes || []).find(({id}) => id === selectedEatingTimeId);
 
                                         if (selectedEatingTime) {
                                             return (
                                                 <div className='eating-time-product-list'>
-                                                    {(selectedEatingTime.products || []).map(product => (
-                                                        <div className='eating-time-product-item'>
-                                                            <div className='product-name'>{product.name}</div>
-                                                            <div className='product-weight'>{product.weight}</div>
-                                                            <div className='action-bar'>
-                                                                <div className='action-item'
-                                                                     onClick={() => {}}>
-                                                                    Edit
-                                                                </div>
-                                                                <div className='action-item'
-                                                                     onClick={() => onProductDelete(product)}>
-                                                                    Delete
+                                                    {(selectedEatingTime.products || []).map(product => {
+                                                        if (selectedProductId === product.id) {
+                                                            return (
+                                                                <Fragment>
+                                                                    <input
+                                                                        value={product.name}
+                                                                        onChange={onSelectedProductNameChange}
+                                                                    />
+                                                                    <input
+                                                                        value={product.weight}
+                                                                        onChange={onSelectedProductWeightChange}
+                                                                    />
+                                                                    <button
+                                                                        onClick={onSelectedProductSaveClick}
+                                                                    >
+                                                                        Save
+                                                                    </button>
+                                                                </Fragment>
+                                                            );
+                                                        }
+                                                            
+                                                        return (
+                                                            <div className='eating-time-product-item'>
+                                                                <div className='product-name'>{product.name}</div>
+                                                                <div className='product-weight'>{product.weight}</div>
+                                                                <div className='action-bar'>
+                                                                    <div className='action-item'
+                                                                         onClick={() => onProductEditClick(product)}>
+                                                                        Edit
+                                                                    </div>
+                                                                    <div className='action-item'
+                                                                         onClick={() => onProductDelete(product)}>
+                                                                        Delete
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    ))}
+                                                        );
+                                                    })}
                                                     <div className='new eating-time-product-item'>
                                                         <input
                                                             value={newProductName}

@@ -10,12 +10,17 @@ import {
     setNewProductWeight,
     addNewProduct,
     addNewDay,
+    setNameForSelectedProduct,
+    setWeightForSelectedProduct,
+    saveSelectedProduct,
+    selectProduct,
 } from './action';
 
 export const mapStateToProps = state => ({
     days: state.healthyFood.days,
     selectedDayId: state.healthyFood.selectedDayId,
     selectedEatingTimeId: state.healthyFood.selectedEatingTimeId,
+    selectedProductId: state.healthyFood.selectedProductId,
     newEatingTimeName: state.healthyFood.newEatingTimeName,
     newProductName: state.healthyFood.newProductName,
     newProductWeight: state.healthyFood.newProductWeight,
@@ -31,6 +36,10 @@ export const mapDispatchToProps = dispatch => ({
     onNewProductWeightChange: event => dispatch(setNewProductWeight(event.target.value)),
     onNewProductAdd: ()=> dispatch(addNewProduct()),
     addNewDay: ()=> dispatch(addNewDay()),
+    onSelectedProductNameChange: (event) => dispatch(setNameForSelectedProduct(event.target.value)),
+    onSelectedProductWeightChange: (event) => dispatch(setWeightForSelectedProduct(event.target.value)),
+    onSelectedProductSaveClick: () => dispatch(saveSelectedProduct()),
+    onProductEditClick: (product) => dispatch(selectProduct(product)),
 });
 
 export default connect(
