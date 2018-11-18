@@ -7,6 +7,7 @@ import EditProductPage from './module/product/edit/container';
 import BasketPage from "./module/basket/container";
 import SignUpPage from "./module/authorization/sign-up/container";
 import SignInPage from "./module/authorization/sign-in/container";
+import HealthyFoodContainer from "./module/healthy-food/container";
 import Header from "./common/header/container";
 import Spinner from "./common/loader/component";
 
@@ -39,6 +40,7 @@ class App extends Component {
                                 <Route exact path='/basket' component={BasketPage}/>
                                 <Route exact path='/sign-up' component={SignUpPage}/>
                                 <Route exact path='/sign-in' component={SignInPage}/>
+                                <Route exact path='/healthy-food' component={HealthyFoodContainer}/>
                                 <Redirect exact from='/' to='/main'/>
                                 <ProtectedRoute
                                     exact

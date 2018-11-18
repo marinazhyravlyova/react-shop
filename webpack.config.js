@@ -97,9 +97,6 @@ module.exports = {
             context: path.resolve(__dirname),
             manifest: require('./dll/vendor-manifest.json'),
         }),
-        new webpack.SourceMapDevToolPlugin({
-            filename: '[name].js.map',
-        }),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.IgnorePlugin(/^codemirror$/),

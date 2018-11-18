@@ -15,6 +15,7 @@ import basketReducer  from './module/basket/reducer';
 import signUpReducer  from './module/authorization/sign-up/reducer';
 import signInReducer  from './module/authorization/sign-in/reducer';
 import authReducer  from './module/authorization/reducer';
+import healthyFoodReducer  from './module/healthy-food/reducer';
 
 let initialState = {
     products: [],
@@ -75,6 +76,7 @@ export default createStore(
         signUp: signUpReducer,     
         signIn: signInReducer,
         authReducer: authReducer,
+        healthyFood: healthyFoodReducer,
     }),
     routerReducer,
     applyMiddleware(
