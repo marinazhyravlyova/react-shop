@@ -1,45 +1,34 @@
 import { connect } from 'react-redux';
 import HealthyFoodComponent from './component';
 import {
-    selectDay,
-    selectEatingTimeItem,
-    addEatingTimeItem,
-    setNewEatingTimeItemName,
+    fetchData,
+    addDay,
+    changeDay,
+    deleteDay,
+    addEatingTime,
+    changeEatingTime,
+    deleteEatingTime,
+    addProduct,
+    changeProduct,
     deleteProduct,
-    setNewProductName,
-    setNewProductWeight,
-    addNewProduct,
-    addNewDay,
-    setNameForSelectedProduct,
-    setWeightForSelectedProduct,
-    saveSelectedProduct,
-    selectProduct,
 } from './action';
 
 export const mapStateToProps = state => ({
     days: state.healthyFood.days,
-    selectedDayId: state.healthyFood.selectedDayId,
-    selectedEatingTimeId: state.healthyFood.selectedEatingTimeId,
-    selectedProductId: state.healthyFood.selectedProductId,
-    newEatingTimeName: state.healthyFood.newEatingTimeName,
-    newProductName: state.healthyFood.newProductName,
-    newProductWeight: state.healthyFood.newProductWeight,
+    allProducts: state.healthyFood.products,
 });
 
 export const mapDispatchToProps = dispatch => ({
-    onDayTabClick: day => dispatch(selectDay(day)),
-    onEatingTimeClick: eatingTimeItem => dispatch(selectEatingTimeItem(eatingTimeItem)),
-    onNewEatingTimeItemClick: () => dispatch(addEatingTimeItem()),
-    onNewEatingTimeNameChange: event => dispatch(setNewEatingTimeItemName(event.target.value)),
-    onProductDelete: (product) => dispatch(deleteProduct(product.id)),
-    onNewProductNameChange: event => dispatch(setNewProductName(event.target.value)),
-    onNewProductWeightChange: event => dispatch(setNewProductWeight(event.target.value)),
-    onNewProductAdd: ()=> dispatch(addNewProduct()),
-    addNewDay: ()=> dispatch(addNewDay()),
-    onSelectedProductNameChange: (event) => dispatch(setNameForSelectedProduct(event.target.value)),
-    onSelectedProductWeightChange: (event) => dispatch(setWeightForSelectedProduct(event.target.value)),
-    onSelectedProductSaveClick: () => dispatch(saveSelectedProduct()),
-    onProductEditClick: (product) => dispatch(selectProduct(product)),
+    fetchData: () => dispatch(fetchData()),
+    onDayAdd: (...args) => dispatch(addDay(...args)),
+    onDayChange: (...args) => dispatch(changeDay(...args)),
+    onDayDelete: (...args) => dispatch(deleteDay(...args)),
+    onEatingTimeAdd: (...args) => dispatch(addEatingTime(...args)),
+    onEatingTimeChange: (...args) => dispatch(changeEatingTime(...args)),
+    onEatingTimeDelete: (...args) => dispatch(deleteEatingTime(...args)),
+    onProductAdd: (...args) => dispatch(addProduct(...args)),
+    onProductChange: (...args) => dispatch(changeProduct(...args)),
+    onProductDelete: (...args) => dispatch(deleteProduct(...args)),
 });
 
 export default connect(

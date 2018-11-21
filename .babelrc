@@ -1,12 +1,17 @@
 {
-  "presets": ["env","react"],
-  "plugins": [
-    [
-      "transform-runtime", {
-        "polyfill": false,
-        "regenerator": true
-      }
+    "presets": [
+        "env",
+        "react"
     ],
-    "transform-object-rest-spread"
-  ]
+    "plugins": [
+        [
+            "transform-runtime",
+            {
+                "polyfill": false,
+                "regenerator": true
+            }
+        ],
+        "transform-object-rest-spread",
+        "transform-class-properties"
+    ]
 }

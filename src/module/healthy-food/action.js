@@ -1,238 +1,150 @@
 import {
-    HEALTHY_FOOD_SET_SELECTED_DAY,
-    HEALTHY_FOOD_SET_SELECTED_EATING_TIME_ITEM,
-    HEALTHY_FOOD_SET_NEW_EATING_TIME_ITEM_NAME,
-    HEALTHY_FOOD_SET_NEW_PRODUCT_NAME,
-    HEALTHY_FOOD_SET_NEW_PRODUCT_WEIGHT,
-    HEALTHY_FOOD_UPDATE_DAY,
-    HEALTHY_FOOD_ADD_DAY,
-    HEALTHY_FOOD_SET_SELECTED_PRODUCT,
+    HEALTHY_FOOD_SET_HEALTHY_FOOD,
+    HEALTHY_FOOD_SET_PRODUCTS,
 } from '../../action-types';
+import HealthyFoodService from './service';
+import ProductService from '../product/service';
 
-let id = 0;
-const getId = () => id++;
-
-export const selectDay = day => (dispatch) => {
-    dispatch({
-        type: HEALTHY_FOOD_SET_SELECTED_DAY,
-        day,
-    });
-};
-
-export const updateDay = day => (dispatch) => {
-    dispatch({
-        type: HEALTHY_FOOD_UPDATE_DAY,
-        day,
-    });
-};
-
-export const addNewDay = () => (dispatch) => {
-    const day = {
-        id: getId(),
-        date: new Date(),
-        eatingTimes: [],
-    };
+export const fetchData = () => async (dispatch, getState) => {
+    const state = getState();
+    const id = state.authReducer.authorizedUser.healthyFood;
+    const { id: userId  } = state.authReducer.authorizedUser;
+    let products = state.main.products;
     
-    dispatch({
-        type: HEALTHY_FOOD_ADD_DAY,
-        day,
-    });
-    
-    dispatch(selectDay(day));
-    
-    if (day.eatingTimes.length > 0) {
-        dispatch(selectEatingTimeItem(day.eatingTimes[0]));
+    if (id) {
+        const { data: healthyFood } = await HealthyFoodService.getHealthyFood(id);
+        
+        if (!products) {
+            const { data } = await ProductService.getProducts();
+
+            products = data;
+        }
+
+        dispatch(setHealthyFood(healthyFood));
+        dispatch(setProducts(products));
+    } else {
+        await HealthyFoodService.createHealthyFood(userId, { days: [] });
     }
 };
 
-export const selectEatingTimeItem = eatingTimeItem => (dispatch) => {
+export const setProducts = (products) => (dispatch) => {
     dispatch({
-        type: HEALTHY_FOOD_SET_SELECTED_EATING_TIME_ITEM,
-        eatingTimeItem,
+        type: HEALTHY_FOOD_SET_PRODUCTS,
+        products,
     });
 };
 
-export const addEatingTimeItem = () => (dispatch, getState) => {
-    const state = getState();
-    const { selectedDayId, newEatingTimeName, days } = state.healthyFood;
-    const selectedDay = (days || []).find(({ id }) => id === selectedDayId);
-    const eatingTime = {
-        id: getId(),
-        name: newEatingTimeName,
-        products: [],
-    };
-    
-    dispatch(updateDay({
-        ...selectedDay,
-        eatingTimes: [
-            ...(selectedDay.eatingTimes || []),
-            eatingTime,
-        ],
-    }));
-    
-    dispatch(selectEatingTimeItem(eatingTime));
-    dispatch(setNewEatingTimeItemName(''));
-};
-
-export const setNewEatingTimeItemName = name => (dispatch) => {
+export const setHealthyFood = (healthyFood) => (dispatch) => {
     dispatch({
-        type: HEALTHY_FOOD_SET_NEW_EATING_TIME_ITEM_NAME,
-        name,
+        type: HEALTHY_FOOD_SET_HEALTHY_FOOD,
+        healthyFood,
     });
 };
 
-export const addNewProduct = () => (dispatch, getState) => {
-    const state = getState();
-    const {
-        selectedDayId,
-        selectedEatingTimeId,
-        days,
-        newProductName,
-        newProductWeight,
-    } = state.healthyFood;
-    const product = {
-        id: getId(),
-        name: newProductName,
-        weight: newProductWeight,
-    };
-    const selectedDay = (days || []).find(({ id }) => id === selectedDayId);
+export const addDay = (day) => async (dispatch, getState) => {
+    const { healthyFood } = getState();
     
-    dispatch(updateDay({
-        ...selectedDay,
-        eatingTimes: (selectedDay.eatingTimes || []).map(eatingTime => {
-            if (selectedEatingTimeId === eatingTime.id) {
+    try {
+        const { data: updatedHealthyFood } = await HealthyFoodService.addDay(healthyFood, day);
 
-                return {
-                    ...eatingTime,
-                    products: [
-                        ...eatingTime.products,
-                        product,
-                    ],
-                };
-            }
-            
-            return eatingTime;
-        }),
-    }));
-
-    dispatch(setNewProductName(''));
-    dispatch(setNewProductWeight(100));
+        dispatch(setHealthyFood(updatedHealthyFood));
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-export const updateProduct = (productToUpdate) => (dispatch, getState) => {
-    const state = getState();
-    const {
-        selectedDayId,
-        selectedEatingTimeId,
-        days,
-    } = state.healthyFood;
-    const selectedDay = (days || []).find(({ id }) => id === selectedDayId);
+export const changeDay = (day) => async (dispatch, getState) => {
+    const { healthyFood } = getState();
 
-    dispatch(updateDay({
-        ...selectedDay,
-        eatingTimes: (selectedDay.eatingTimes || []).map(eatingTime => {
-            if (selectedEatingTimeId === eatingTime.id) {
+    try {
+        const { data: updatedHealthyFood } = await HealthyFoodService.changeDay(healthyFood, day);
 
-                return {
-                    ...eatingTime,
-                    products: (eatingTime.products || []).map(product => {
-                        if (product.id === productToUpdate.id) {
-                            return productToUpdate;
-                        }
-                        
-                        return product;
-                    }),
-                };
-            }
-
-            return eatingTime;
-        }),
-    }));
+        dispatch(setHealthyFood(updatedHealthyFood));
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-export const deleteProduct = (productId) => (dispatch, getState) => {
-    const state = getState();
-    const {
-        days,
-        selectedDayId,
-        selectedEatingTimeId,
-    } = state.healthyFood;
-    const selectedDay = (days || []).find(({ id }) => id === selectedDayId);
-    
-    dispatch(updateDay({
-        ...selectedDay,
-        eatingTimes: (selectedDay.eatingTimes || []).map(eatingTime => {
-            if (selectedEatingTimeId === eatingTime.id) {
-                return {
-                    ...eatingTime,
-                    products: (eatingTime.products || []).filter(({ id }) => id !== productId),
-                };
-            }
+export const deleteDay = (day) => async (dispatch, getState) => {
+    const { healthyFood } = getState();
 
-            return eatingTime;
-        }),
-    }));
+    try {
+        const { data: updatedHealthyFood } = await HealthyFoodService.deleteDay(healthyFood, day);
+
+        dispatch(setHealthyFood(updatedHealthyFood));
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-export const setNewProductName = (name) => (dispatch) => {
-    dispatch({
-        type: HEALTHY_FOOD_SET_NEW_PRODUCT_NAME,
-        name,
-    });
+export const addEatingTime = (day, eatingTime) => async (dispatch, getState) => {
+    const { healthyFood } = getState();
+
+    try {
+        const { data: updatedHealthyFood } = await HealthyFoodService.addEatingTime(healthyFood, day, eatingTime);
+
+        dispatch(setHealthyFood(updatedHealthyFood));
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-export const setNewProductWeight = (weight) => (dispatch) => {
-    dispatch({
-        type: HEALTHY_FOOD_SET_NEW_PRODUCT_WEIGHT,
-        weight,
-    });
+export const changeEatingTime = (day, eatingTime) => async (dispatch, getState) => {
+    const { healthyFood } = getState();
+
+    try {
+        const { data: updatedHealthyFood } = await HealthyFoodService.changeEatingTime(healthyFood, day, eatingTime);
+
+        dispatch(setHealthyFood(updatedHealthyFood));
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-export const selectProduct = (product) => (dispatch) => {
-    dispatch({
-        type: HEALTHY_FOOD_SET_SELECTED_PRODUCT,
-        product,
-    });
+export const deleteEatingTime = (day, eatingTime) => async (dispatch, getState) => {
+    const { healthyFood } = getState();
+
+    try {
+        const { data: updatedHealthyFood } = await HealthyFoodService.deleteEatingTime(healthyFood, day, eatingTime);
+
+        dispatch(setHealthyFood(updatedHealthyFood));
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-export const setNameForSelectedProduct = (name) => (dispatch, getState) => {
-    const state = getState();
-    const {
-        days,
-        selectedDayId,
-        selectedEatingTimeId,
-        selectedProductId,
-    } = state.healthyFood;
-    const selectedDay = (days || []).find(({ id }) => id === selectedDayId);
-    const selectedEatingTime = (selectedDay.eatingTimes || []).find(({ id }) => id === selectedEatingTimeId);
-    const selectedProduct = (selectedEatingTime.products || []).find(({ id }) => id === selectedProductId);
-    
-    
-    dispatch(updateProduct({
-        ...selectedProduct,
-        name
-    }));
+export const addProduct = (day, eatingTime, product) => async (dispatch, getState) => {
+    const { healthyFood } = getState();
+
+    try {
+        const { data: updatedHealthyFood } = await HealthyFoodService.addProductDescription(healthyFood, day, eatingTime, product);
+
+        dispatch(setHealthyFood(updatedHealthyFood));
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-export const setWeightForSelectedProduct = (weight) => (dispatch, getState) => {
-    const state = getState();
-    const {
-        days,
-        selectedDayId,
-        selectedEatingTimeId,
-        selectedProductId,
-    } = state.healthyFood;
-    const selectedDay = (days || []).find(({ id }) => id === selectedDayId);
-    const selectedEatingTime = (selectedDay.eatingTimes || []).find(({ id }) => id === selectedEatingTimeId);
-    const selectedProduct = (selectedEatingTime.products || []).find(({ id }) => id === selectedProductId);
+export const changeProduct = (day, eatingTime, product) => async (dispatch, getState) => {
+    const { healthyFood } = getState();
 
+    try {
+        const { data: updatedHealthyFood } = await HealthyFoodService.changeProductDescription(healthyFood, day, eatingTime, product);
 
-    dispatch(updateProduct({
-        ...selectedProduct,
-        weight
-    }));
+        dispatch(setHealthyFood(updatedHealthyFood));
+    } catch (error) {
+        console.log(error);
+    }
 };
 
-export const saveSelectedProduct = () => (dispatch) => {
-    dispatch(selectProduct({}));
+export const deleteProduct = (day, eatingTime, product) => async (dispatch, getState) => {
+    const { healthyFood } = getState();
+
+    try {
+        const { data: updatedHealthyFood } = await HealthyFoodService.deleteProductDescription(healthyFood, day, eatingTime, product);
+
+        dispatch(setHealthyFood(updatedHealthyFood));
+    } catch (error) {
+        console.log(error);
+    }
 };
