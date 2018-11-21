@@ -1,31 +1,29 @@
 import React, {Component, Fragment} from 'react';
 
 export default class ProductItem extends Component {
-    state = {
-        productWeight: null,
-        isEditMode: false,
-    };
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            productWeight: props.productDescription.weight,
+            isEditMode: false,
+        }
+    }
 
     onProductWeightChange = (event) => {
-        const productWeight = parseInt(event.target.value, 10);
+        const productWeight = parseInt(event.target.value || '0', 10);
 
         this.setState({ productWeight });
     };
 
-    componentWillUpdate(newPros) {
-        if (newPros.productDescription.weight !== this.state.productWeight) {
-            this.setState({productWeight: newPros.productDescription.weight});
-        }
-    }
-
     onProductSaveClick = () => {
-        const { product, onProductChange } = this.props;
+        const { productDescription, onProductChange } = this.props;
         const { productWeight } = this.state;
         
         this.setState({ isEditMode: false });
 
         onProductChange({
-            ...product,
+            ...productDescription,
             weight: productWeight,
         });
     };
