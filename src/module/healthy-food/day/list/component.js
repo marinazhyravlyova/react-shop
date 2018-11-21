@@ -68,7 +68,7 @@ export default class DaysComponent extends Component {
                                 onProductChange={onProductChange}
                                 onProductDelete={onProductDelete}
                             />
-                        );
+                        ); 
                     }
                     
                     return null;

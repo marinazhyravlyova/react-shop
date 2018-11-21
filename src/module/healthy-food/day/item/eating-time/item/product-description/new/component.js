@@ -36,6 +36,7 @@ export default class NewProductForm extends Component {
                 <Select
                     className='select-product'
                     value={product}
+                    isSearchable
                     onChange={this.onProductIdChange}
                     options={(allProducts || []).map(({id, name}) => ({value: id, label: name}))}
                 />

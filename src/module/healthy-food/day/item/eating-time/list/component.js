@@ -49,7 +49,7 @@ export default class EatingTimesList extends Component {
                             onClick={() => this.onEatingTimeClick(eatingTime)}
                         >
                             {eatingTime.name}
-                            <span onClick={() => onEatingTimeDelete(eatingTime)}>X</span>
+                            <span className="action-item" onClick={() => onEatingTimeDelete(eatingTime)}>X</span>
                         </div>
                     ))}
                     <div className='new eating-time-item'>

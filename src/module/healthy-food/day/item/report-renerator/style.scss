@@ -1,0 +1,21 @@
+.report-generator {
+    width: 100%;
+    margin-top: 20px;
+    
+    .action-panel {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .report-area {
+        margin-top: 10px;
+        width: 100%;
+        
+        textarea {
+            width: 99%;
+            min-height: 300px;
+        }
+    }
+}

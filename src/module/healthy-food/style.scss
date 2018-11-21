@@ -31,14 +31,14 @@ $border-color: #CCCCCC;
             margin: 10px;
             padding: 10px;
             border: 1px solid $border-color;
-            
-            .action-item {
-                margin-left: 20px;
-                
-                &:hover {
-                    color: blue;
-                }
-            }
+        }
+    }
+
+    .action-item {
+        margin-left: 20px;
+
+        &:hover {
+            color: blue;
         }
     }
     

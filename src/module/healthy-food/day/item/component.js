@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import EatingTimesList from './eating-time/list/component';
 import TableComponent from './table/component';
+import ReportGenerator from './report-renerator/component';
 
 export default class DayComponent extends Component {
     render() {
@@ -29,9 +30,8 @@ export default class DayComponent extends Component {
                         onProductDelete={(...args) => onProductDelete(day, ...args)}
                     />
                 </div>
-                <TableComponent
-                    day={day}
-                />
+                <TableComponent day={day}/>
+                <ReportGenerator day={day}/>
             </Fragment>
         );
     }

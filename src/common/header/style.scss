@@ -1,28 +1,19 @@
-.header-container{
-    
-}
 .header {
-    background: url(https://demos.creative-tim.com/material-kit-pro-react/static/media/clark-street-merc.4e443266.jpg) 50%;
-    height: 420px;
+    height: 50px;
     display: flex;
     width: 100%;
     justify-content: space-around;
     padding-top: 21px;
     
     .main-link{
-
-        a{
+        a {
             text-decoration: none;
             color: white;
             font-size: 20px;
         }
     }
     .add-link{
-
-        img{
-
-        }
-        a{
+        a {
             text-decoration: none;
             color: white;
             font-size: 20px;

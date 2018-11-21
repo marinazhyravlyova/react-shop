@@ -45,7 +45,7 @@ export default class MainPage extends Component {
                 productPropertyName => {
                     const productPropertyValue = product[productPropertyName];
 
-                    return productPropertyValue.toString().indexOf(criterionSearch) !== -1;
+                    return (productPropertyValue || '').toString().indexOf(criterionSearch) !== -1;
                 });
 
             return !!propertyName;

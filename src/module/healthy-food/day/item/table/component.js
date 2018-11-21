@@ -1,43 +1,8 @@
 import React, { Component } from 'react';
+import CaloriesService from '../service';
 import './style.scss';
 
 export default class TableComponent extends Component {
-    getCalories(eatingTime) {
-        return (eatingTime.productsDescription || [])
-            .reduce((calories, { weight, product }) => calories + (product.calories / 100) * weight, 0);
-    }
-
-    getProtein(eatingTime) {
-        return (eatingTime.productsDescription || [])
-            .reduce((calories, { weight, product }) => calories + (product.protein / 100) * weight, 0);
-    }
-
-    getFat(eatingTime) {
-        return (eatingTime.productsDescription || [])
-            .reduce((calories, { weight, product }) => calories + (product.fat / 100) * weight, 0);
-    }
-
-    getCarbohydrates(eatingTime) {
-        return (eatingTime.productsDescription || [])
-            .reduce((calories, { weight, product }) => calories + (product.carbohydrates / 100) * weight, 0);
-    }
-    
-    getAllCalories(eatingTimes) {
-        return (eatingTimes || []).reduce((allCalories, eatingTime) => allCalories + this.getCalories(eatingTime), 0);
-    }
-
-    getAllProtein(eatingTimes) {
-        return (eatingTimes || []).reduce((allProtein, eatingTime) => allProtein + this.getProtein(eatingTime), 0);
-    }
-
-    getAllFat(eatingTimes) {
-        return (eatingTimes || []).reduce((allFat, eatingTime) => allFat + this.getCarbohydrates(eatingTime), 0);
-    }
-
-    getAllCarbohydrates(eatingTimes) {
-        return (eatingTimes || []).reduce((allCarbohydrates, eatingTime) => allCarbohydrates + this.getCarbohydrates(eatingTime), 0);
-    }
-    
     render() {
         const { day = {} } = this.props;
         const { eatingTimes } = day;
@@ -70,16 +35,16 @@ export default class TableComponent extends Component {
                                 {eatingTime.name}
                             </td>
                             <td className='result-table-column'>
-                                {this.getCalories(eatingTime)}
+                                {CaloriesService.getCalories(eatingTime)}
                             </td>
                             <td className='result-table-column'>
-                                {this.getProtein(eatingTime)}
+                                {CaloriesService.getProtein(eatingTime)}
                             </td>
                             <td className='result-table-column'>
-                                {this.getFat(eatingTime)}
+                                {CaloriesService.getFat(eatingTime)}
                             </td>
                             <td className='result-table-column'>
-                                {this.getCarbohydrates(eatingTime)}
+                                {CaloriesService.getCarbohydrates(eatingTime)}
                             </td>
                         </tr>
                     ))}
@@ -89,16 +54,16 @@ export default class TableComponent extends Component {
                         <td className='result-table-column'>
                         </td>
                         <td className='result-table-column'>
-                            {this.getAllCalories(eatingTimes)}
+                            {CaloriesService.getAllCalories(eatingTimes)}
                         </td>
                         <td className='result-table-column'>
-                            {this.getAllProtein(eatingTimes)}
+                            {CaloriesService.getAllProtein(eatingTimes)}
                         </td>
                         <td className='result-table-column'>
-                            {this.getAllFat(eatingTimes)}
+                            {CaloriesService.getAllFat(eatingTimes)}
                         </td>
                         <td className='result-table-column'>
-                            {this.getAllCarbohydrates(eatingTimes)}
+                            {CaloriesService.getAllCarbohydrates(eatingTimes)}
                         </td>
                     </tr>
                 </tfoot>
