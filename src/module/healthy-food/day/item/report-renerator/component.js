@@ -6,13 +6,15 @@ export default class ReportGenerator extends Component {
     state = {
         report: '',
     };
+    
+    capitalize = ([fistChar, ...restChars]) => `${(fistChar).toUpperCase()}${(restChars).join('')}`;
 
     onReportChange = (event) => this.setState({ report: event.target.value });
     
     getEatingTimeReport(eatingTime) {
         return (eatingTime.productsDescription || []).reduce((eatingTimeReport, productDescription) => {
             return `${eatingTimeReport}\t${productDescription.product.name} - ${productDescription.weight} г;\n`;
-        }, `${eatingTime.name}: \n`);
+        }, `\n${(this.capitalize(eatingTime.name))}: \n`);
     }
     
     generateReport = () => {
@@ -21,10 +23,12 @@ export default class ReportGenerator extends Component {
         let report = (day.eatingTimes || []).reduce((report, eatingTime) => {
             const eatingTimeReport = this.getEatingTimeReport(eatingTime);
             
-            return `${report}\n${eatingTimeReport}`;
+            return `${report}${eatingTimeReport}`;
         }, `Отчет ${date.getDay()}.${date.getMonth()}.${date.getFullYear()}:`);
+        
         const calories = CaloriesService.getAllCalories(day.eatingTimes);
-        report = `${report}\n Каллории: ${calories} ккал;`;
+
+        report = `${report}\n Калории: ${calories} ккал;`;
         
         this.setState({ report });
     };
